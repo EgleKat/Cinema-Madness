@@ -7,23 +7,38 @@ using UnityEngine;
 /// </summary>
 public class TargetChanging : MonoBehaviour {
     
-    /// <summary>
     /// Stores the objects the player will travel to
-    /// </summary>
     Queue<GameObject> targets;
+
+    // Keeps track of current queue size
+    int sizeCounter;
+
+    // Largest size queue can grow to
+    public int MAXSIZE = 10;
 
 	// Use this for initialization
 	void Start () {
         targets = new Queue<GameObject>();
+        sizeCounter = 0;
 	}
 	
     /// <summary>
-    /// Adds a new object to the <see cref="targets"/> queue
+    /// Adds a new object to the <see cref="targets"/> queue if it is not full
     /// </summary>
     /// <param name="newTarget">The object being added</param>
-    public void AddTarget(GameObject newTarget)
+    /// <returns>Shows if the add was successful</returns>
+    public bool AddTarget(GameObject newTarget)
     {
-        targets.Enqueue(newTarget);
+        if (sizeCounter < MAXSIZE)
+        {
+            targets.Enqueue(newTarget);
+            sizeCounter++;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -32,6 +47,7 @@ public class TargetChanging : MonoBehaviour {
     /// <returns>The next object in the <see cref="targets"/> queue</returns>
     public GameObject GetNextTarget()
     {
+        sizeCounter--;
         return targets.Count == 0 ? null : targets.Dequeue();
     }
 
