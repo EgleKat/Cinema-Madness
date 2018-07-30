@@ -2,10 +2,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+/// <summary>
+/// Superclass for objects which NPCs can use. It has general queue and lockdown methods
+/// </summary>
 public class ServiceStation : MonoBehaviour
 {
 
-    bool inUse;
+    bool locked;
     ManageActionQueue playerActionQueue;
     Queue<ManageNpcActionQueue> waitingNpcs;
 
@@ -13,16 +16,16 @@ public class ServiceStation : MonoBehaviour
     {
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
-        inUse = false;
+        unlockObject();
     }
     private void unlockObject()
     {
-        inUse = false;
+        locked = false;
     }
 
     private void lockObject()
     {
-        inUse = true;
+        locked = true;
     }
     private void OnMouseDown()
     {
@@ -41,6 +44,7 @@ public class ServiceStation : MonoBehaviour
         //When timer's finished, pop the person of the queue
         Debug.Log("Serving NPC");
         serveFirstNpc();
+        lockObject();
     }
     private void serveFirstNpc()
     {
