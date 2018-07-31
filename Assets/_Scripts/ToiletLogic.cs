@@ -19,7 +19,7 @@ public class ToiletLogic : ServiceStation {
     /// </summary>
     public override void ActivateService()
     {
-        unlockObject();
-        acceptNpc();
+        UnlockObject();
+        AcceptNpc();
     }
 }

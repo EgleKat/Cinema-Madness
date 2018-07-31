@@ -36,7 +36,7 @@ public class ManageNpcActionQueue : MonoBehaviour {
         if (actionQueue.Count != 0)
         {
             Debug.Log("Entering queue");
-            actionQueue.Dequeue().enterQueue(this);
+            actionQueue.Dequeue().EnterQueue(this);
 
         }
         else

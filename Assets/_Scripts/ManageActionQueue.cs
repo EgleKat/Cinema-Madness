@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManageActionQueue : MonoBehaviour {
+public class ManageActionQueue : MonoBehaviour
+{
 
     /// Stores the objects the player will travel to
     Queue<ServiceStation> targets;
@@ -39,17 +40,17 @@ public class ManageActionQueue : MonoBehaviour {
     public bool AddToQueue(ServiceStation serviceStation)
     {
         Debug.Log("Adding Action to queue");
-    }
-}
 
         if (sizeCounter < MAXSIZE)
         {
             targets.Enqueue(serviceStation);
             sizeCounter++;
+            serviceStation.ActivateService();
             return true;
         }
         else
         {
             return false;
         }
-        serviceStation.ActivateService();
+    }
+}

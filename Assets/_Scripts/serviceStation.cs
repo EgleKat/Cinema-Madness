@@ -18,14 +18,14 @@ public class ServiceStation : MonoBehaviour
     {
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
-        unlockObject();
+        UnlockObject();
     }
-    protected void unlockObject()
+    protected void UnlockObject()
     {
         locked = false;
     }
 
-    protected void lockObject()
+    protected void LockObject()
     {
         locked = true;
     }
@@ -34,23 +34,23 @@ public class ServiceStation : MonoBehaviour
         playerActionQueue.AddToQueue(this);
     }
 
-    public virtual void enterQueue(ManageNpcActionQueue npcActionQueue)
+    public virtual void EnterQueue(ManageNpcActionQueue npcActionQueue)
     {
         waitingNpcs.Enqueue(npcActionQueue);
-        acceptNpc();
+        AcceptNpc();
     }
 
-    protected virtual void acceptNpc()
+    protected virtual void AcceptNpc()
     {
         if (!locked && waitingNpcs.Count !=0)
         {
             //Pop the NPC of the queue
             Debug.Log("Serving NPC");
-            serveFirstNpc();
-            lockObject();
+            ServeFirstNpc();
+            LockObject();
         }
     }
-    protected void serveFirstNpc()
+    protected void ServeFirstNpc()
     {
         if (!locked)
         {
@@ -60,10 +60,10 @@ public class ServiceStation : MonoBehaviour
             Debug.Log("Dequeing npc");
         }
     }
-    protected void finishServingNpc()
+    protected void FinishServingNpc()
     {
-        unlockObject();
-        waitingNpcs.Dequeue().finishTask();
+        UnlockObject();
+        waitingNpcs.Dequeue().FinishTask();
         Debug.Log("Toilet Locked. Clean it!");
 
         //remove timer
