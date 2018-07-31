@@ -17,5 +17,6 @@ public class ManageActionQueue : MonoBehaviour {
     public void addToQueue(ServiceStation serviceStation)
     {
         Debug.Log("Adding Action to queue");
+        serviceStation.ActivateService();
     }
 }
