@@ -8,48 +8,74 @@ using System.Collections.Generic;
 public class ServiceStation : MonoBehaviour
 {
 
-    bool locked;
-    ManageActionQueue playerActionQueue;
-    Queue<ManageNpcActionQueue> waitingNpcs;
+    protected bool locked;
+    protected ManageActionQueue playerActionQueue;
+    protected float timeToServeNpc = 0;
+    public Queue<ManageNpcActionQueue> waitingNpcs;
+    private GameObject timer;
 
-    private void Awake()
+    protected void Awake()
     {
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
         unlockObject();
     }
-    private void unlockObject()
+    protected void unlockObject()
     {
         locked = false;
     }
 
-    private void lockObject()
+    protected void lockObject()
     {
         locked = true;
     }
-    private void OnMouseDown()
+    protected void OnMouseDown()
     {
-        playerActionQueue.addToQueue(this);
+        playerActionQueue.AddToQueue(this);
     }
 
-    public void enterQueue(ManageNpcActionQueue npcActionQueue)
+    public virtual void enterQueue(ManageNpcActionQueue npcActionQueue)
     {
         waitingNpcs.Enqueue(npcActionQueue);
         acceptNpc();
     }
 
-    private void acceptNpc()
+    protected virtual void acceptNpc()
     {
-        //Start timer
-        //When timer's finished, pop the person of the queue
-        Debug.Log("Serving NPC");
-        serveFirstNpc();
-        lockObject();
+        if (!locked && waitingNpcs.Count !=0)
+        {
+            //Pop the NPC of the queue
+            Debug.Log("Serving NPC");
+            serveFirstNpc();
+            lockObject();
+        }
     }
-    private void serveFirstNpc()
+    protected void serveFirstNpc()
     {
-        Debug.Log("Dequeing npc");
+        if (!locked)
+        {
+            Invoke("finishServingNpc", timeToServeNpc);
+            timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
+            timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
+            Debug.Log("Dequeing npc");
+        }
+    }
+    protected void finishServingNpc()
+    {
+        unlockObject();
         waitingNpcs.Dequeue().finishTask();
+        Debug.Log("Toilet Locked. Clean it!");
+
+        //remove timer
+        Destroy(timer);
+
+    }
+    /// <summary>
+    /// Called when the player reaches the service
+    /// </summary>
+    public virtual void ActivateService()
+    {
+
     }
 
 }

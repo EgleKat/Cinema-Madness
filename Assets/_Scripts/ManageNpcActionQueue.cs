@@ -17,7 +17,7 @@ public class ManageNpcActionQueue : MonoBehaviour {
     void Start () {
         
         actionQueue.Enqueue(toilet);
-        enterQueue();
+        EnterQueue();
 	}
 	
 	// Update is called once per frame
@@ -25,13 +25,13 @@ public class ManageNpcActionQueue : MonoBehaviour {
 		
 	}
 
-    public void finishTask()
+    public void FinishTask()
     {
         Debug.Log("Moving on to next task");
-        enterQueue();
+        EnterQueue();
     }
 
-    private void enterQueue()
+    private void EnterQueue()
     {
         if (actionQueue.Count != 0)
         {
