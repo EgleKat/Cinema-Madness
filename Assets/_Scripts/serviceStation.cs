@@ -10,7 +10,9 @@ public class ServiceStation : MonoBehaviour
 
     protected bool locked;
     protected ManageActionQueue playerActionQueue;
+    protected float timeToServeNpc = 0;
     public Queue<ManageNpcActionQueue> waitingNpcs;
+    private GameObject timer;
 
     protected void Awake()
     {
@@ -40,7 +42,7 @@ public class ServiceStation : MonoBehaviour
 
     protected virtual void acceptNpc()
     {
-        if (!locked)
+        if (!locked && waitingNpcs.Count !=0)
         {
             //Pop the NPC of the queue
             Debug.Log("Serving NPC");
@@ -48,11 +50,25 @@ public class ServiceStation : MonoBehaviour
             lockObject();
         }
     }
-    protected virtual void serveFirstNpc()
+    protected void serveFirstNpc()
     {
-        Debug.Log("Dequeing npc base");
+        if (!locked)
+        {
+            Invoke("finishServingNpc", timeToServeNpc);
+            timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
+            timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
+            Debug.Log("Dequeing npc");
+        }
+    }
+    protected void finishServingNpc()
+    {
+        unlockObject();
         waitingNpcs.Dequeue().finishTask();
-        lockObject();
+        Debug.Log("Toilet Locked. Clean it!");
+
+        //remove timer
+        Destroy(timer);
+
     }
     /// <summary>
     /// Called when the player reaches the service
