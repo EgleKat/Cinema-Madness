@@ -33,33 +33,32 @@ public class ServiceStation : MonoBehaviour
     {
         playerActionQueue.AddToQueue(this);
     }
-
+    /// <summary>
+    /// Push npc into the queue
+    /// </summary>
+    /// <param name="npcActionQueue"></param>
     public virtual void EnterQueue(ManageNpcActionQueue npcActionQueue)
     {
         waitingNpcs.Enqueue(npcActionQueue);
         AcceptNpc();
     }
-
+    /// <summary>
+    /// Let npc use the queue if the service isn't locked
+    /// </summary>
     protected virtual void AcceptNpc()
     {
         if (!locked && waitingNpcs.Count !=0)
         {
             //Pop the NPC of the queue
-            Debug.Log("Serving NPC");
-            ServeFirstNpc();
-            LockObject();
-        }
-    }
-    protected void ServeFirstNpc()
-    {
-        if (!locked)
-        {
             Invoke("finishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
-            Debug.Log("Dequeing npc");
+            LockObject();
         }
     }
+    /// <summary>
+    /// Called after the timer runs out
+    /// </summary>
     protected void FinishServingNpc()
     {
         UnlockObject();
@@ -71,7 +70,7 @@ public class ServiceStation : MonoBehaviour
 
     }
     /// <summary>
-    /// Called when the player reaches the service
+    /// Called when the player (main character) reaches the service
     /// </summary>
     public virtual void ActivateService()
     {

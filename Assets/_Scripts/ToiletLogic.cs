@@ -16,6 +16,7 @@ public class ToiletLogic : ServiceStation {
 
     /// <summary>
     /// Called when the player reaches the service
+    /// Unlocks toilet
     /// </summary>
     public override void ActivateService()
     {
