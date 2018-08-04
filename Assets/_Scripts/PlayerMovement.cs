@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
     Pathfinding.AIPath playerAIScript;
+    ManageActionQueue playerQueue;
 	// Use this for initialization
 	void Awake () {
-        playerAIScript = gameObject.GetComponent<Pathfinding.AIPath>();
+        playerAIScript = GetComponent<Pathfinding.AIPath>();
+        playerQueue = GetComponent<ManageActionQueue>();
 
     }
 	
@@ -20,9 +22,9 @@ public class PlayerMovement : MonoBehaviour {
     /// Set next object to travel to
     /// </summary>
     /// <param name="target">The object to travel to</param>
-    public void SetPlayerTarget(ServiceStation target)
+    public void SetPlayerTarget()
     {
-        gameObject.GetComponent<Pathfinding.AIDestinationSetter>().target = target.gameObject.transform;
+        GetComponent<Pathfinding.AIDestinationSetter>().target = playerQueue.GetNextTarget().gameObject.transform;
     }
 
     public void StartMoving()

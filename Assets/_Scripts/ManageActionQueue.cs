@@ -15,7 +15,7 @@ public class ManageActionQueue : MonoBehaviour
     public int MAXSIZE = 10;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         targets = new Queue<ServiceStation>();
         sizeCounter = 0;
