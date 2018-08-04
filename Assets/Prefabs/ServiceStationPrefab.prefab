@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212148478881833152}
   - component: {fileID: 114251897049712226}
   - component: {fileID: 61788381854862552}
+  - component: {fileID: 114355744548491360}
   m_Layer: 0
   m_Name: ServiceStationPrefab
   m_TagString: Untagged
@@ -76,6 +77,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 100e67b2fbeb0904aae522cb1f6a62ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114355744548491360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1756246211855570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3a97b85bd8ada34a9ee3a8ed56c15ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212148478881833152

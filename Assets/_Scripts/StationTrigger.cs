@@ -17,6 +17,6 @@ public class StationTrigger : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        
+        playerQueue.AddToQueue(gameObject.GetComponent<ServiceStation>());
     }
 }
