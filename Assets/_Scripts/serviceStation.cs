@@ -50,7 +50,7 @@ public class ServiceStation : MonoBehaviour
         if (!locked && waitingNpcs.Count !=0)
         {
             //Pop the NPC of the queue
-            Invoke("finishServingNpc", timeToServeNpc);
+            Invoke("FinishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
             LockObject();
