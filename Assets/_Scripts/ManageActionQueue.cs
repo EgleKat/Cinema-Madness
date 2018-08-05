@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class ManageActionQueue : MonoBehaviour
 {
-
     /// Stores the objects the player will travel to
     Queue<ServiceStation> targets;
 
@@ -28,8 +28,14 @@ public class ManageActionQueue : MonoBehaviour
     /// <returns>The next object in the <see cref="targets"/> queue</returns>
     public ServiceStation GetNextTarget()
     {
+        Debug.Log("Dequeue next service station, count = " + targets.Count);
         sizeCounter--;
-        return targets.Count == 0 ? null : targets.Dequeue();
+        return targets.Dequeue();
+    }
+
+    public bool IsTargetsEmpty()
+    {
+        return targets.Count > 0 ? false : true;
     }
 
     /// <summary>
@@ -39,10 +45,10 @@ public class ManageActionQueue : MonoBehaviour
     /// <returns>Shows if the add was successful</returns>
     public bool AddToQueue(ServiceStation serviceStation)
     {
-        Debug.Log("Adding Action to queue");
 
         if (sizeCounter < MAXSIZE)
         {
+            Debug.Log("Adding Action to queue");
             targets.Enqueue(serviceStation);
             sizeCounter++;
             serviceStation.ActivateService();
