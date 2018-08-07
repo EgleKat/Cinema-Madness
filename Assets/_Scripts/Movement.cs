@@ -14,25 +14,18 @@ public class Movement : MonoBehaviour {
 	void Awake () {
         aiScript = GetComponent<Pathfinding.AIPath>();
 
-        if (gameObject.name == "Player")
-        {
-            manageQueue = GetComponent<SuperActionQueue>();
-        }
+        manageQueue = GetComponent<SuperActionQueue>();
 
         finishedTask = true;
     }
 
     // Update is called once per frame
     void Update () {
-		if(!manageQueue.IsQueueEmpty() && finishedTask)
+        if (!manageQueue.IsQueueEmpty() && finishedTask && !manageQueue.GetIsManageNPCQueue())
         {
             finishedTask = false;
             SetTarget();
             StartMoving();
-        }
-        else
-        {
-            StopMoving();
         }
 	}
 
@@ -40,7 +33,7 @@ public class Movement : MonoBehaviour {
     /// Set next object to travel to
     /// </summary>
     /// <param name="target">The object to travel to</param>
-    private ServiceStation SetTarget()
+    public ServiceStation SetTarget()
     {
         ServiceStation nextTarget = manageQueue.GetNextTarget();
         GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
@@ -50,7 +43,7 @@ public class Movement : MonoBehaviour {
     /// <summary>
     /// Call this after <see cref="SetPlayerTarget"/> to start player moving to destination
     /// </summary>
-    private void StartMoving()
+    public void StartMoving()
     {
         aiScript.canMove = true;
     }

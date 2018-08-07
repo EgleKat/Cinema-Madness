@@ -56,6 +56,7 @@ public class ServiceStation : MonoBehaviour
             LockObject();
         }
     }
+
     /// <summary>
     /// Called after the timer runs out
     /// </summary>

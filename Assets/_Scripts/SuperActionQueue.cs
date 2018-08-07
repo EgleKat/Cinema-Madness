@@ -9,17 +9,16 @@ public class SuperActionQueue : MonoBehaviour {
     // Keeps track of current queue size
     protected int sizeCounter;
     protected ServiceStation currentTarget;
-
-    void Awake()
+    protected bool isManageNPCQueue;
+	
+    protected void OnAwake()
     {
+        Debug.Log("Action Queue Created");
         actionQueue = new Queue<ServiceStation>();
         sizeCounter = 0;
+        isManageNPCQueue = false;
     }
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		
@@ -41,4 +40,8 @@ public class SuperActionQueue : MonoBehaviour {
         return actionQueue.Dequeue();
     }
 
+    public bool GetIsManageNPCQueue()
+    {
+        return isManageNPCQueue;
+    }
 }

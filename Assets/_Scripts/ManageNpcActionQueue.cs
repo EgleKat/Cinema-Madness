@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class ManageNpcActionQueue : SuperActionQueue {
    
-    ToiletLogic toilet;
-
+    ServiceStation toilet;
+    Movement movement;
 
     private void Awake()
     {
-        toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ToiletLogic>();
+        toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ServiceStation>();
+        movement = GetComponent<Movement>();
+        OnAwake();
     }
+
     // Use this for initialization
     void Start () {
-        
+        isManageNPCQueue = true;
+        Debug.Log(toilet);
         actionQueue.Enqueue(toilet);
         CheckQueue();
 	}
@@ -31,10 +35,11 @@ public class ManageNpcActionQueue : SuperActionQueue {
 
     private void CheckQueue()
     {
-        if (IsQueueEmpty())
+        if (!IsQueueEmpty())
         {
             Debug.Log("Entering queue");
-            actionQueue.Dequeue().EnterQueue(this);
+            movement.SetTarget().EnterQueue(this);
+            movement.StartMoving();
 
         }
         else
