@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManageNpcActionQueue : MonoBehaviour {
+public class ManageNpcActionQueue : SuperActionQueue {
    
-    Queue<ToiletLogic> actionQueue;
     ToiletLogic toilet;
 
 
     private void Awake()
     {
         toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ToiletLogic>();
-        actionQueue = new Queue<ToiletLogic>();
     }
     // Use this for initialization
     void Start () {
         
         actionQueue.Enqueue(toilet);
-        EnterQueue();
+        CheckQueue();
 	}
 	
 	// Update is called once per frame
@@ -28,12 +26,12 @@ public class ManageNpcActionQueue : MonoBehaviour {
     public void FinishTask()
     {
         Debug.Log("Moving on to next task");
-        EnterQueue();
+        CheckQueue();
     }
 
-    private void EnterQueue()
+    private void CheckQueue()
     {
-        if (actionQueue.Count != 0)
+        if (IsQueueEmpty())
         {
             Debug.Log("Entering queue");
             actionQueue.Dequeue().EnterQueue(this);

@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class StationTrigger : MonoBehaviour {
 
-    PlayerMovement movePlayer;
+    Movement movePlayer;
     ManageActionQueue playerQueue;
     Pathfinding.AIPath triggerPlayerMovement;
 	// Use this for initialization
 	void Awake () {
         GameObject player = GameObject.Find("Player");
         playerQueue = player.GetComponent<ManageActionQueue>();
-        movePlayer = player.GetComponent<PlayerMovement>();
+        movePlayer = player.GetComponent<Movement>();
         triggerPlayerMovement = player.GetComponent<Pathfinding.AIPath>();
 	}
 	

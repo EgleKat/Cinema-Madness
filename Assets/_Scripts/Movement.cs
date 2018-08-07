@@ -3,25 +3,31 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class Movement : MonoBehaviour {
 
-    Pathfinding.AIPath playerAIScript;
-    ManageActionQueue playerQueue;
+    Pathfinding.AIPath aiScript;
+    SuperActionQueue manageQueue;
 
     private bool finishedTask;
+
 	// Use this for initialization
 	void Awake () {
-        playerAIScript = GetComponent<Pathfinding.AIPath>();
-        playerQueue = GetComponent<ManageActionQueue>();
+        aiScript = GetComponent<Pathfinding.AIPath>();
+
+        if (gameObject.name == "Player")
+        {
+            manageQueue = GetComponent<SuperActionQueue>();
+        }
+
         finishedTask = true;
     }
 
     // Update is called once per frame
     void Update () {
-		if(!playerQueue.IsTargetsEmpty() && finishedTask)
+		if(!manageQueue.IsQueueEmpty() && finishedTask)
         {
             finishedTask = false;
-            SetPlayerTarget();
+            SetTarget();
             StartMoving();
         }
         else
@@ -34,9 +40,11 @@ public class PlayerMovement : MonoBehaviour {
     /// Set next object to travel to
     /// </summary>
     /// <param name="target">The object to travel to</param>
-    private void SetPlayerTarget()
+    private ServiceStation SetTarget()
     {
-        GetComponent<Pathfinding.AIDestinationSetter>().target = playerQueue.GetNextTarget().gameObject.transform;
+        ServiceStation nextTarget = manageQueue.GetNextTarget();
+        GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
+        return nextTarget;
     }
 
     /// <summary>
@@ -44,7 +52,7 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void StartMoving()
     {
-        playerAIScript.canMove = true;
+        aiScript.canMove = true;
     }
 
     /// <summary>
@@ -52,7 +60,7 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void StopMoving()
     {
-        playerAIScript.canMove = false;
+        aiScript.canMove = false;
     }
 
     /// <summary>

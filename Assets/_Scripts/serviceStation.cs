@@ -72,7 +72,7 @@ public class ServiceStation : MonoBehaviour
     /// <summary>
     /// Called when the player (main character) reaches the service
     /// </summary>
-    public virtual void ActivateService()
+    public virtual void ActivateService( )
     {
 
     }
