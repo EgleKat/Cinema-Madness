@@ -21,6 +21,8 @@ public class ToiletLogic : ServiceStation {
     public override void ActivateService()
     {
         UnlockObject();
+        //call player here
+
         AcceptNpc();
     }
 }
