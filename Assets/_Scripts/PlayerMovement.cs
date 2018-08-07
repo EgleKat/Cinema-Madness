@@ -24,10 +24,6 @@ public class PlayerMovement : MonoBehaviour {
             SetPlayerTarget();
             StartMoving();
         }
-        else
-        {
-            StopMoving();
-        }
 	}
 
     /// <summary>
@@ -36,6 +32,7 @@ public class PlayerMovement : MonoBehaviour {
     /// <param name="target">The object to travel to</param>
     private void SetPlayerTarget()
     {
+        Debug.Log("Target Set");
         GetComponent<Pathfinding.AIDestinationSetter>().target = playerQueue.GetNextTarget().gameObject.transform;
     }
 
@@ -44,6 +41,7 @@ public class PlayerMovement : MonoBehaviour {
     /// </summary>
     private void StartMoving()
     {
+        Debug.Log("Moving");
         playerAIScript.canMove = true;
     }
 
