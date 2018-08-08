@@ -25,10 +25,9 @@ public class ManageActionQueue : SuperActionQueue
 
         if (sizeCounter < MAXSIZE)
         {
-            Debug.Log("Adding Action to queue");
+            Debug.Log("Added " + serviceStation + "to queue");
             actionQueue.Enqueue(serviceStation);
             sizeCounter++;
-            serviceStation.ActivateService();
             return true;
         }
         else

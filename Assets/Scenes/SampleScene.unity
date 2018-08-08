@@ -1406,6 +1406,11 @@ Prefab:
       propertyPath: canMove
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114662812980208808, guid: 1c29140ce53916c4a9f5b803c38e23c5,
+        type: 2}
+      propertyPath: logPathResults
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 114648512997244532, guid: 1c29140ce53916c4a9f5b803c38e23c5, type: 2}

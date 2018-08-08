@@ -17,7 +17,6 @@ public class ManageNpcActionQueue : SuperActionQueue {
     // Use this for initialization
     void Start () {
         isManageNPCQueue = true;
-        Debug.Log(toilet);
         actionQueue.Enqueue(toilet);
         CheckQueue();
 	}
@@ -29,7 +28,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
 
     public void FinishTask()
     {
-        Debug.Log("Moving on to next task");
+       // Debug.Log("Moving on to next task");
         CheckQueue();
     }
 
@@ -37,7 +36,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
     {
         if (!IsQueueEmpty())
         {
-            Debug.Log("Entering queue");
+           // Debug.Log("Entering queue");
             movement.SetTarget().EnterQueue(this);
             movement.StartMoving();
 
@@ -45,7 +44,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
         else
         {
             //Go home
-            Debug.Log("Going home");
+            //Debug.Log("Going home");
         }
     }
 }

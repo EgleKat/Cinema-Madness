@@ -10,10 +10,9 @@ public class SuperActionQueue : MonoBehaviour {
     protected int sizeCounter;
     protected ServiceStation currentTarget;
     protected bool isManageNPCQueue;
-	
+    protected ServiceStation lastTarget;
     protected void OnAwake()
     {
-        Debug.Log("Action Queue Created");
         actionQueue = new Queue<ServiceStation>();
         sizeCounter = 0;
         isManageNPCQueue = false;
@@ -35,9 +34,10 @@ public class SuperActionQueue : MonoBehaviour {
     /// <returns>The next object in the <see cref="targets"/> queue</returns>
     public ServiceStation GetNextTarget()
     {
-        Debug.Log("Dequeue next service station, count = " + actionQueue.Count);
         sizeCounter--;
-        return actionQueue.Dequeue();
+        lastTarget = actionQueue.Dequeue();
+        Debug.Log("Removed " + lastTarget);
+        return lastTarget;
     }
 
     public bool GetIsManageNPCQueue()

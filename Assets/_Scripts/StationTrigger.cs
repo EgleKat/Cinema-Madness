@@ -7,6 +7,9 @@ public class StationTrigger : MonoBehaviour {
     Movement movePlayer;
     ManageActionQueue playerQueue;
     Pathfinding.AIPath triggerPlayerMovement;
+
+    private bool alreadyClicked;
+
 	// Use this for initialization
 	void Awake () {
         GameObject player = GameObject.Find("Player");
@@ -22,11 +25,7 @@ public class StationTrigger : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        triggerPlayerMovement.canMove = false;
+        GetComponent<ServiceStation>().ActivateService();
     }
 
-    private void OnMouseDown()
-    {
-        playerQueue.AddToQueue(gameObject.GetComponent<ServiceStation>());
-    }
 }

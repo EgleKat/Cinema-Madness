@@ -13,10 +13,12 @@ public class ServiceStation : MonoBehaviour
     protected float timeToServeNpc = 0;
     public Queue<ManageNpcActionQueue> waitingNpcs;
     private GameObject timer;
+    protected Movement playerMovement;
 
     protected void Awake()
     {
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
         UnlockObject();
     }
@@ -29,10 +31,12 @@ public class ServiceStation : MonoBehaviour
     {
         locked = true;
     }
-    protected void OnMouseDown()
+
+    protected void OnMouseUp()
     {
         playerActionQueue.AddToQueue(this);
     }
+
     /// <summary>
     /// Push npc into the queue
     /// </summary>
@@ -64,7 +68,6 @@ public class ServiceStation : MonoBehaviour
     {
         UnlockObject();
         waitingNpcs.Dequeue().FinishTask();
-        Debug.Log("Toilet Locked. Clean it!");
 
         //remove timer
         Destroy(timer);
@@ -73,9 +76,12 @@ public class ServiceStation : MonoBehaviour
     /// <summary>
     /// Called when the player (main character) reaches the service
     /// </summary>
-    public virtual void ActivateService( )
+    public virtual void ActivateService()
     {
-
+        UnlockObject();
+        //call player here
+        playerMovement.SetFinishedTaskTrue();
+        AcceptNpc();
     }
 
 }

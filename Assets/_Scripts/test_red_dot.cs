@@ -20,7 +20,6 @@ public class test_red_dot : MonoBehaviour {
             Vector3 touchPosinWorldSpace = camera.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, camera.nearClipPlane));
             // Move object across XY plane
             transform.position = touchPosinWorldSpace;
-            Debug.Log("clicked");
         }
     }
 

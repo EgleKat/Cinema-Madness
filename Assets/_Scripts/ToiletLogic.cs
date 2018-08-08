@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ToiletLogic : ServiceStation {
 
+
     // Use this for initialization
     protected new void Awake () {
         base.Awake();
@@ -22,7 +23,7 @@ public class ToiletLogic : ServiceStation {
     {
         UnlockObject();
         //call player here
-
+        playerMovement.SetFinishedTaskTrue();
         AcceptNpc();
     }
 }
