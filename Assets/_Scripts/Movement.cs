@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour {
     void Update () {
         if (!manageQueue.IsQueueEmpty() && finishedTask && !manageQueue.GetIsManageNPCQueue())
         {
+            Debug.Log("Get rekt n00b!");
             finishedTask = false;
             SetTarget();
             StartMoving();

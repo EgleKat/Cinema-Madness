@@ -7,7 +7,7 @@ public class ManageActionQueue : SuperActionQueue
 {
 
     // Largest size queue can grow to
-    public int MAXSIZE = 10;
+    public readonly int MAXSIZE = 10;
 
     // Use this for initialization
     void Awake()
