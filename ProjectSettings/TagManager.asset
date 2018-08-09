@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bathroom
   - NPC
+  - PopcornMachine
   layers:
   - Default
   - TransparentFX

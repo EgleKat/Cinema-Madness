@@ -1,14 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// Defines collider/trigger behaviour for ServiceStation
+/// </summary>
 public class StationTrigger : MonoBehaviour {
 
     Movement movePlayer;
     ManageActionQueue playerQueue;
     Pathfinding.AIPath triggerPlayerMovement;
 
-    private bool alreadyClicked;
 
 	// Use this for initialization
 	void Awake () {
@@ -22,10 +23,20 @@ public class StationTrigger : MonoBehaviour {
 	void Update () {
 		
 	}
-
+    /// <summary>
+    /// Collide with an objetc
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        GetComponent<ServiceStation>().ActivateService();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            GetComponent<ServiceStation>().ActivateService();
+        }
+        else if (collision.gameObject.CompareTag("NPC"))
+        {
+            gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<ManageNpcActionQueue>());
+        }
     }
 
 }

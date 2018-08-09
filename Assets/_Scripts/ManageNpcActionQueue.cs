@@ -5,11 +5,13 @@ using UnityEngine;
 public class ManageNpcActionQueue : SuperActionQueue {
    
     ServiceStation toilet;
+    ServiceStation popcorn;
     Movement movement;
 
     private void Awake()
     {
         toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ServiceStation>();
+        popcorn = GameObject.FindGameObjectWithTag("PopcornMachine").GetComponent<ServiceStation>();
         movement = GetComponent<Movement>();
         OnAwake();
     }
@@ -18,6 +20,9 @@ public class ManageNpcActionQueue : SuperActionQueue {
     void Start () {
         isManageNPCQueue = true;
         actionQueue.Enqueue(toilet);
+        actionQueue.Enqueue(popcorn);
+        actionQueue.Enqueue(toilet);
+
         CheckQueue();
 	}
 	
@@ -28,7 +33,6 @@ public class ManageNpcActionQueue : SuperActionQueue {
 
     public void FinishTask()
     {
-       // Debug.Log("Moving on to next task");
         CheckQueue();
     }
 
@@ -36,8 +40,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
     {
         if (!IsQueueEmpty())
         {
-           // Debug.Log("Entering queue");
-            movement.SetTarget().EnterQueue(this);
+            movement.SetTarget();
             movement.StartMoving();
 
         }

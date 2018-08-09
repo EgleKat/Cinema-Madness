@@ -49,15 +49,16 @@ public class ServiceStation : MonoBehaviour
     /// <summary>
     /// Let npc use the queue if the service isn't locked
     /// </summary>
-    protected virtual void AcceptNpc()
+    public virtual void AcceptNpc()
     {
         if (!locked && waitingNpcs.Count !=0)
         {
+            LockObject();
             //Pop the NPC of the queue
             Invoke("FinishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
-            LockObject();
+            
         }
     }
 
@@ -66,9 +67,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     protected void FinishServingNpc()
     {
-        UnlockObject();
         waitingNpcs.Dequeue().FinishTask();
-
         //remove timer
         Destroy(timer);
 

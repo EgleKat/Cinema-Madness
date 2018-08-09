@@ -16,6 +16,7 @@ public class SuperActionQueue : MonoBehaviour {
         actionQueue = new Queue<ServiceStation>();
         sizeCounter = 0;
         isManageNPCQueue = false;
+        Debug.Log("WTF IS THIS? (isManage)");
     }
 
 	// Update is called once per frame
@@ -25,11 +26,11 @@ public class SuperActionQueue : MonoBehaviour {
 
     public bool IsQueueEmpty()
     {
-        return actionQueue.Count > 0 ? false : true;
+        return actionQueue.Count == 0;
     }
 
     /// <summary>
-    /// Gets the object the player will tarvel to next
+    /// Gets the object the character will travel to next
     /// </summary>
     /// <returns>The next object in the <see cref="targets"/> queue</returns>
     public ServiceStation GetNextTarget()
