@@ -12,7 +12,7 @@ public class ServiceStation : MonoBehaviour
     protected ManageActionQueue playerActionQueue;
     protected float timeToServeNpc = 0;
     public Queue<ManageNpcActionQueue> waitingNpcs;
-    private GameObject timer;
+    protected GameObject timer;
     protected Movement playerMovement;
 
     protected void Awake()
@@ -65,7 +65,7 @@ public class ServiceStation : MonoBehaviour
     /// <summary>
     /// Called after the timer runs out
     /// </summary>
-    protected void FinishServingNpc()
+    protected virtual void FinishServingNpc()
     {
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
@@ -77,6 +77,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     public virtual void ActivateService()
     {
+
         UnlockObject();
         //call player here
         playerMovement.SetFinishedTaskTrue();
