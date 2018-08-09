@@ -41,13 +41,13 @@ public class ManageNpcActionQueue : SuperActionQueue {
         if (!IsQueueEmpty())
         {
             movement.SetTarget();
-            movement.StartMoving();
-
         }
         else
         {
-            //Go home
-            //Debug.Log("Going home");
+            //TODO move this to movement
+            GetComponent<Pathfinding.AIDestinationSetter>().target = GameObject.FindGameObjectWithTag("Spawn").transform;
         }
+        movement.StartMoving();
+
     }
 }

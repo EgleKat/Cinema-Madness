@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -23,7 +24,6 @@ public class Movement : MonoBehaviour {
     void Update () {
         if (!manageQueue.IsQueueEmpty() && finishedTask && !manageQueue.GetIsManageNPCQueue())
         {
-            Debug.Log("Get rekt n00b!");
             finishedTask = false;
             SetTarget();
             StartMoving();
@@ -34,11 +34,11 @@ public class Movement : MonoBehaviour {
     /// Set next object to travel to
     /// </summary>
     /// <param name="target">The object to travel to</param>
-    public ServiceStation SetTarget()
+    public void SetTarget()
     {
+        //TODO pass in an argument of which target to go to
         ServiceStation nextTarget = manageQueue.GetNextTarget();
         GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
-        return nextTarget;
     }
 
     /// <summary>
