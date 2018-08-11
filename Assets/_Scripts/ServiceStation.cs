@@ -20,6 +20,7 @@ public class ServiceStation : MonoBehaviour
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
+
         UnlockObject();
     }
     protected void UnlockObject()
@@ -80,7 +81,9 @@ public class ServiceStation : MonoBehaviour
 
         UnlockObject();
         //call player here
-        playerMovement.SetFinishedTaskTrue();
+
+        playerMovement.SetTarget();
+        playerMovement.StartMoving();
         AcceptNpc();
     }
 

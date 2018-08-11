@@ -29,8 +29,10 @@ public class StationTrigger : MonoBehaviour {
     /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Object triggered");
         if (collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Service Activated");
             GetComponent<ServiceStation>().ActivateService();
         }
         else if (collision.gameObject.CompareTag("NPC"))

@@ -38,7 +38,10 @@ public class ToiletLogic : ServiceStation {
             isClean = true;
             UnlockObject();
             //call player here
-            playerMovement.SetFinishedTaskTrue();
+
+
+            playerMovement.SetTarget();
+            playerMovement.StartMoving();
             AcceptNpc();
         }
     }

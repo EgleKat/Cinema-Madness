@@ -8,11 +8,17 @@ public class ManageActionQueue : SuperActionQueue
 
     // Largest size queue can grow to
     public readonly int MAXSIZE = 10;
+    private Movement playerMovement;
+    private Pathfinding.AIPath playerAI;
+    private bool firstObjectAdded;
 
     // Use this for initialization
     void Awake()
     {
         OnAwake();
+        playerAI = GameObject.FindGameObjectWithTag("Player").GetComponent<Pathfinding.AIPath>();
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        firstObjectAdded = false;
     }
 
     /// <summary>
@@ -22,12 +28,27 @@ public class ManageActionQueue : SuperActionQueue
     /// <returns>Shows if the add was successful</returns>
     public bool AddToQueue(ServiceStation serviceStation)
     {
-
         if (sizeCounter < MAXSIZE)
         {
-            Debug.Log("Added " + serviceStation + "to queue");
-            actionQueue.Enqueue(serviceStation);
-            sizeCounter++;
+            Debug.Log("queue empty " + IsQueueEmpty());
+            Debug.Log("reached end of path " + playerAI.reachedEndOfPath);
+            Debug.Log("first object moved " + firstObjectAdded);
+            if (IsQueueEmpty() && (playerAI.reachedEndOfPath || !firstObjectAdded))
+            {
+                firstObjectAdded = true;
+                Debug.Log("Added " + serviceStation + "to queue");
+                actionQueue.Enqueue(serviceStation);
+                sizeCounter++;
+
+                playerMovement.SetTarget();
+                playerMovement.StartMoving();
+            }
+            else
+            {
+                Debug.Log("Added " + serviceStation + "to queue");
+                actionQueue.Enqueue(serviceStation);
+                sizeCounter++;
+            }
             return true;
         }
         else

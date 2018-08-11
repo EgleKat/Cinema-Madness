@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour {
     Pathfinding.AIPath aiScript;
     SuperActionQueue manageQueue;
 
-    private bool finishedTask;
+    private bool startMoving;
 
 	// Use this for initialization
 	void Awake () {
@@ -17,28 +17,19 @@ public class Movement : MonoBehaviour {
 
         manageQueue = GetComponent<SuperActionQueue>();
 
-        finishedTask = true;
+        startMoving = true;
     }
-
-    // Update is called once per frame
-    void Update () {
-        if (!manageQueue.IsQueueEmpty() && finishedTask && !manageQueue.GetIsManageNPCQueue())
-        {
-            finishedTask = false;
-            SetTarget();
-            StartMoving();
-        }
-	}
 
     /// <summary>
     /// Set next object to travel to
     /// </summary>
-    /// <param name="target">The object to travel to</param>
     public void SetTarget()
     {
-        //TODO pass in an argument of which target to go to
-        ServiceStation nextTarget = manageQueue.GetNextTarget();
-        GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
+        if (!manageQueue.IsQueueEmpty())
+        {
+            ServiceStation nextTarget = manageQueue.GetNextTarget();
+            GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
+        }
     }
 
     /// <summary>
@@ -60,8 +51,13 @@ public class Movement : MonoBehaviour {
     /// <summary>
     /// When first object is clicked start player movement
     /// </summary>
-    public void SetFinishedTaskTrue()
+    public bool GetStartMoving()
     {
-        finishedTask = true;
+        return startMoving;
+    }
+
+    public void DoneFirstMove()
+    {
+        startMoving = false;
     }
 }

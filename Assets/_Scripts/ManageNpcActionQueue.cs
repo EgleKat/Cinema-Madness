@@ -18,7 +18,6 @@ public class ManageNpcActionQueue : SuperActionQueue {
 
     // Use this for initialization
     void Start () {
-        isManageNPCQueue = true;
         actionQueue.Enqueue(toilet);
         actionQueue.Enqueue(popcorn);
         actionQueue.Enqueue(toilet);
