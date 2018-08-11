@@ -23,7 +23,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
         actionQueue.Enqueue(toilet);
 
         CheckQueue();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

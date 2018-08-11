@@ -27,6 +27,10 @@ public class SuperActionQueue : MonoBehaviour {
         return actionQueue.Count == 0;
     }
 
+    public ServiceStation PeekNextItem()
+    {
+        return actionQueue.Peek();
+    }
     /// <summary>
     /// Gets the object the character will travel to next
     /// </summary>
@@ -37,5 +41,15 @@ public class SuperActionQueue : MonoBehaviour {
         lastTarget = actionQueue.Dequeue();
         Debug.Log("Removed " + lastTarget);
         return lastTarget;
+    }
+
+    public ServiceStation GetLastTarget()
+    {
+        return lastTarget;
+    }
+
+    public void ResetLastTarget()
+    {
+        lastTarget = null;
     }
 }

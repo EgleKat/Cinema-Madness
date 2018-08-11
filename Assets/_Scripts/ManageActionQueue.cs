@@ -30,9 +30,6 @@ public class ManageActionQueue : SuperActionQueue
     {
         if (sizeCounter < MAXSIZE)
         {
-            Debug.Log("queue empty " + IsQueueEmpty());
-            Debug.Log("reached end of path " + playerAI.reachedEndOfPath);
-            Debug.Log("first object moved " + firstObjectAdded);
             if (IsQueueEmpty() && (playerAI.reachedEndOfPath || !firstObjectAdded))
             {
                 firstObjectAdded = true;

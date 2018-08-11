@@ -39,10 +39,11 @@ public class ToiletLogic : ServiceStation {
             UnlockObject();
             //call player here
 
-
-            playerMovement.SetTarget();
-            playerMovement.StartMoving();
             AcceptNpc();
         }
+
+        playerMovement.SetTarget();
+        playerMovement.StartMoving();
+        trigger.NotWorking();
     }
 }

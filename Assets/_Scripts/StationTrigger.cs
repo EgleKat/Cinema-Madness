@@ -9,6 +9,7 @@ public class StationTrigger : MonoBehaviour {
     Movement movePlayer;
     ManageActionQueue playerQueue;
     Pathfinding.AIPath triggerPlayerMovement;
+    private bool working;
 
 
 	// Use this for initialization
@@ -17,6 +18,7 @@ public class StationTrigger : MonoBehaviour {
         playerQueue = player.GetComponent<ManageActionQueue>();
         movePlayer = player.GetComponent<Movement>();
         triggerPlayerMovement = player.GetComponent<Pathfinding.AIPath>();
+        working = false;
 	}
 	
 	// Update is called once per frame
@@ -27,18 +29,28 @@ public class StationTrigger : MonoBehaviour {
     /// Collide with an objetc
     /// </summary>
     /// <param name="collision"></param>
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("Object triggered");
-        if (collision.gameObject.CompareTag("Player"))
+
+        if (collision.gameObject.CompareTag("Player") && !working && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
         {
             Debug.Log("Service Activated");
+            working = true;
             GetComponent<ServiceStation>().ActivateService();
         }
-        else if (collision.gameObject.CompareTag("NPC"))
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("NPC"))
         {
             gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<ManageNpcActionQueue>());
         }
+    }
+
+    public void NotWorking()
+    {
+        working = false;
     }
 
 }

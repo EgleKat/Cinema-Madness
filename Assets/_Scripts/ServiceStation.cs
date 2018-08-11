@@ -14,12 +14,14 @@ public class ServiceStation : MonoBehaviour
     public Queue<ManageNpcActionQueue> waitingNpcs;
     protected GameObject timer;
     protected Movement playerMovement;
+    protected StationTrigger trigger;
 
     protected void Awake()
     {
         playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         waitingNpcs = new Queue<ManageNpcActionQueue>();
+        trigger = GetComponent<StationTrigger>();
 
         UnlockObject();
     }
@@ -73,6 +75,7 @@ public class ServiceStation : MonoBehaviour
         Destroy(timer);
 
     }
+
     /// <summary>
     /// Called when the player (main character) reaches the service
     /// </summary>
@@ -84,6 +87,7 @@ public class ServiceStation : MonoBehaviour
 
         playerMovement.SetTarget();
         playerMovement.StartMoving();
+        trigger.NotWorking();
         AcceptNpc();
     }
 

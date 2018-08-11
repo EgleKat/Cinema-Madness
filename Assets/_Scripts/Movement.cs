@@ -30,6 +30,10 @@ public class Movement : MonoBehaviour {
             ServiceStation nextTarget = manageQueue.GetNextTarget();
             GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
         }
+        else
+        {
+            manageQueue.ResetLastTarget();
+        }
     }
 
     /// <summary>
