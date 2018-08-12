@@ -85,7 +85,7 @@ public class ServiceStation : MonoBehaviour
         UnlockObject();
         //call player here
 
-        playerMovement.SetTarget();
+        playerMovement.SetTargetFromQueue();
         playerMovement.StartMoving();
         trigger.NotWorking();
         AcceptNpc();

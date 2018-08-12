@@ -23,7 +23,7 @@ public class Movement : MonoBehaviour {
     /// <summary>
     /// Set next object to travel to
     /// </summary>
-    public void SetTarget()
+    public void SetTargetFromQueue()
     {
         if (!manageQueue.IsQueueEmpty())
         {
@@ -34,6 +34,15 @@ public class Movement : MonoBehaviour {
         {
             manageQueue.ResetLastTarget();
         }
+    }
+
+    /// <summary>
+    /// Set target to object passed in
+    /// </summary>
+    /// <param name="target">Target to travel to</param>
+    public void SetTarget(GameObject target)
+    {
+        GetComponent<Pathfinding.AIDestinationSetter>().target = target.transform;
     }
 
     /// <summary>

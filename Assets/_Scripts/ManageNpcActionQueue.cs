@@ -39,7 +39,7 @@ public class ManageNpcActionQueue : SuperActionQueue {
     {
         if (!IsQueueEmpty())
         {
-            movement.SetTarget();
+            movement.SetTargetFromQueue();
         }
         else
         {

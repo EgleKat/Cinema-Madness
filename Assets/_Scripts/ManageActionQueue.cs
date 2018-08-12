@@ -37,7 +37,7 @@ public class ManageActionQueue : SuperActionQueue
                 actionQueue.Enqueue(serviceStation);
                 sizeCounter++;
 
-                playerMovement.SetTarget();
+                playerMovement.SetTargetFromQueue();
                 playerMovement.StartMoving();
             }
             else
