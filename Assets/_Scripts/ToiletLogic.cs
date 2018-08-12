@@ -42,8 +42,6 @@ public class ToiletLogic : ServiceStation {
             AcceptNpc();
         }
 
-        playerMovement.SetTargetFromQueue();
-        playerMovement.StartMoving();
-        trigger.NotWorking();
+        playerActionQueue.FinishWithServiceStation();
     }
 }

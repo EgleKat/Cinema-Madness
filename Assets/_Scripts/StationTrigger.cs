@@ -6,19 +6,12 @@ using UnityEngine;
 /// </summary>
 public class StationTrigger : MonoBehaviour {
 
-    Movement movePlayer;
-    ManageActionQueue playerQueue;
-    Pathfinding.AIPath triggerPlayerMovement;
-    private bool working;
-
+    PlayerActionQueue playerQueue;
 
 	// Use this for initialization
 	void Awake () {
         GameObject player = GameObject.Find("Player");
-        playerQueue = player.GetComponent<ManageActionQueue>();
-        movePlayer = player.GetComponent<Movement>();
-        triggerPlayerMovement = player.GetComponent<Pathfinding.AIPath>();
-        working = false;
+        playerQueue = player.GetComponent<PlayerActionQueue>();
 	}
 	
 	// Update is called once per frame
@@ -26,31 +19,28 @@ public class StationTrigger : MonoBehaviour {
 		
 	}
     /// <summary>
-    /// Collide with an objetc
+    /// Collide with the player
     /// </summary>
     /// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
-
-        if (collision.gameObject.CompareTag("Player") && !working && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
+        // if the collidee is Player AND if the player is already at the station
+        if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
         {
-            Debug.Log("Service Activated");
-            working = true;
             GetComponent<ServiceStation>().ActivateService();
         }
     }
-
+    /// <summary>
+    /// Logic for NPCs colliding with this
+    /// </summary>
+    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
-            gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<ManageNpcActionQueue>());
+            gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<NpcActionQueue>());
         }
     }
-
-    public void NotWorking()
-    {
-        working = false;
-    }
+    
 
 }

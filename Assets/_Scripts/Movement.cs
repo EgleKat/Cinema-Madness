@@ -6,34 +6,12 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour {
 
-    Pathfinding.AIPath aiScript;
-    SuperActionQueue manageQueue;
-
-    private bool startMoving;
+    Pathfinding.AIDestinationSetter aiDestinationSetter;
+    //Pathfinding.AIPath aiPath;
 
 	// Use this for initialization
 	void Awake () {
-        aiScript = GetComponent<Pathfinding.AIPath>();
-
-        manageQueue = GetComponent<SuperActionQueue>();
-
-        startMoving = true;
-    }
-
-    /// <summary>
-    /// Set next object to travel to
-    /// </summary>
-    public void SetTargetFromQueue()
-    {
-        if (!manageQueue.IsQueueEmpty())
-        {
-            ServiceStation nextTarget = manageQueue.GetNextTarget();
-            GetComponent<Pathfinding.AIDestinationSetter>().target = nextTarget.gameObject.transform;
-        }
-        else
-        {
-            manageQueue.ResetLastTarget();
-        }
+        aiDestinationSetter = GetComponent<Pathfinding.AIDestinationSetter>();
     }
 
     /// <summary>
@@ -42,35 +20,27 @@ public class Movement : MonoBehaviour {
     /// <param name="target">Target to travel to</param>
     public void SetTarget(GameObject target)
     {
-        GetComponent<Pathfinding.AIDestinationSetter>().target = target.transform;
+        aiDestinationSetter.target = target.transform;
     }
 
-    /// <summary>
-    /// Call this after <see cref="SetPlayerTarget"/> to start player moving to destination
-    /// </summary>
-    public void StartMoving()
+    public void SetTarget(ServiceStation target)
     {
-        aiScript.canMove = true;
+        aiDestinationSetter.target = target.gameObject.transform;
     }
 
-    /// <summary>
-    /// Called when touching object to stop player until they have finished interacting with object
-    /// </summary>
-    private void StopMoving()
-    {
-        aiScript.canMove = false;
-    }
+    ///// <summary>
+    ///// Call this after <see cref="SetPlayerTarget"/> to start player moving to destination
+    ///// </summary>
+    //public void StartMoving()
+    //{
+    //    aiPath.canMove = true;
+    //}
 
-    /// <summary>
-    /// When first object is clicked start player movement
-    /// </summary>
-    public bool GetStartMoving()
-    {
-        return startMoving;
-    }
-
-    public void DoneFirstMove()
-    {
-        startMoving = false;
-    }
+    ///// <summary>
+    ///// Called when touching object to stop player until they have finished interacting with object
+    ///// </summary>
+    //private void StopMoving()
+    //{
+    //    aiPath.canMove = false;
+    //}
 }

@@ -9,18 +9,16 @@ public class ServiceStation : MonoBehaviour
 {
 
     protected bool locked;
-    protected ManageActionQueue playerActionQueue;
+    protected PlayerActionQueue playerActionQueue;
     protected float timeToServeNpc = 0;
-    public Queue<ManageNpcActionQueue> waitingNpcs;
+    public Queue<NpcActionQueue> waitingNpcs;
     protected GameObject timer;
-    protected Movement playerMovement;
     protected StationTrigger trigger;
 
     protected void Awake()
     {
-        playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<ManageActionQueue>();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
-        waitingNpcs = new Queue<ManageNpcActionQueue>();
+        playerActionQueue = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerActionQueue>();
+        waitingNpcs = new Queue<NpcActionQueue>();
         trigger = GetComponent<StationTrigger>();
 
         UnlockObject();
@@ -44,7 +42,7 @@ public class ServiceStation : MonoBehaviour
     /// Push npc into the queue
     /// </summary>
     /// <param name="npcActionQueue"></param>
-    public virtual void EnterQueue(ManageNpcActionQueue npcActionQueue)
+    public virtual void EnterQueue(NpcActionQueue npcActionQueue)
     {
         waitingNpcs.Enqueue(npcActionQueue);
         AcceptNpc();
@@ -54,7 +52,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     public virtual void AcceptNpc()
     {
-        if (!locked && waitingNpcs.Count !=0)
+        if (!locked && waitingNpcs.Count !=0 )
         {
             LockObject();
             //Pop the NPC of the queue
@@ -70,6 +68,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     protected virtual void FinishServingNpc()
     {
+        UnlockObject();
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
         Destroy(timer);
@@ -81,13 +80,9 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     public virtual void ActivateService()
     {
-
-        UnlockObject();
         //call player here
 
-        playerMovement.SetTargetFromQueue();
-        playerMovement.StartMoving();
-        trigger.NotWorking();
+        playerActionQueue.FinishWithServiceStation();
         AcceptNpc();
     }
 
