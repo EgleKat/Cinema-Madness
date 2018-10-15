@@ -11,7 +11,7 @@ public class NpcActionQueue : ActionQueue {
     private void Awake()
     {
         toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ServiceStation>();
-        popcorn = GameObject.FindGameObjectWithTag("PopcornMachine").GetComponent<ServiceStation>();
+        popcorn = GameObject.FindGameObjectWithTag("PopcornStall").GetComponent<ServiceStation>();
         movement = GetComponent<Movement>();
         OnAwake();
     }

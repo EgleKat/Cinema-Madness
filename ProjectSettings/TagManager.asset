@@ -8,6 +8,10 @@ TagManager:
   - NPC
   - PopcornMachine
   - Spawn
+  - PopcornBox
+  - PopcornStall
+  - Undefined
+  - Popcorn
   layers:
   - Default
   - TransparentFX
