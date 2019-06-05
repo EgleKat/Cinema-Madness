@@ -28,6 +28,7 @@ public class StationTrigger : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
         {
             GetComponent<ServiceStation>().ActivateService();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().StopMoving();
         }
     }
     /// <summary>

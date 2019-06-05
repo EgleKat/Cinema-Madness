@@ -18,6 +18,7 @@ public class PlayerActionQueue : ActionQueue
         playerMovement = GetComponent<PlayerMovement>();
     }
 
+
     /// <summary>
     /// Adds a new object to the <see cref="targets"/> queue if it is not full
     /// </summary>
@@ -32,14 +33,15 @@ public class PlayerActionQueue : ActionQueue
             {
                 firstObjectAdded = true;
                 actionQueue.Enqueue(serviceStation);
-                Debug.Log("Added service station to queue");
                 SetNextTarget();
-                //playerMovement.SetTarget(GetNextTarget());
             }
             else
             {
                 actionQueue.Enqueue(serviceStation);
+                SetNextTarget();
+                playerMovement.StartMoving();
             }
+            
             return true;
         }
         else
@@ -53,6 +55,7 @@ public class PlayerActionQueue : ActionQueue
         if (!IsQueueEmpty())
         {
             playerMovement.SetTarget(GetNextTarget());
+            playerMovement.StartMoving();
         }
         else
         {
@@ -63,5 +66,7 @@ public class PlayerActionQueue : ActionQueue
     public void FinishWithServiceStation()
     {
         SetNextTarget();
+        playerMovement.StartMoving();
+
     }
 }

@@ -6,25 +6,45 @@ public class PlayerMovement : MonoBehaviour
 {
 
     private Vector3 position;
-    private Vector3 velocity;
+    //Which direction to move in
+
     private Vector3 stationPosition;
+    private bool move;
+    private float speed = 0.05f;
+    private Vector3 velocity;
+
     // Start is called before the first frame update
     void Start()
     {
         position = gameObject.transform.position;
+        move = false;
+        velocity = new Vector3(0f,0f,0f);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        position = position + velocity;
+        if(move){
+            position = gameObject.transform.position;
+            //find the direction, where to go and multiply by speed
+            velocity = Vector3.Normalize(stationPosition - position) * speed;
+            //change position based on velocity
+            gameObject.transform.position = position + velocity;
+        }
     }
 
     public void SetTarget(ServiceStation station) {
-        stationPosition = station.transform.position;
+        stationPosition = station.transform.position;    
     }
 
     public void StartMoving() {
-
+        move = true;
     }
+
+    public void StopMoving() {
+        move = false;
+    }
+
+
 }
