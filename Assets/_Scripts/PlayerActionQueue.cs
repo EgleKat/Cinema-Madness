@@ -9,13 +9,13 @@ public class PlayerActionQueue : ActionQueue
     // Largest size queue can grow to
     public readonly int MAXSIZE = 10;
     private bool firstObjectAdded;
-    private PlayerMovement playerMovement;
+    private Movement playerMovement;
     // Use this for initialization
     void Awake()
     {
         OnAwake();
         firstObjectAdded = false;
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = GetComponent<Movement>();
     }
 
 
@@ -54,7 +54,7 @@ public class PlayerActionQueue : ActionQueue
     {
         if (!IsQueueEmpty())
         {
-            playerMovement.SetTarget(GetNextTarget());
+            playerMovement.SetTarget(GetNextTarget().gameObject);
             playerMovement.StartMoving();
         }
         else

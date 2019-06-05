@@ -6,11 +6,12 @@ public class NpcActionQueue : ActionQueue {
    
     ServiceStation toilet;
     ServiceStation popcorn;
-
+    Movement movement;
     private void Awake()
     {
         toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ServiceStation>();
         popcorn = GameObject.FindGameObjectWithTag("PopcornStall").GetComponent<ServiceStation>();
+        movement = gameObject.GetComponent<Movement>();
         OnAwake();
     }
 
@@ -37,12 +38,13 @@ public class NpcActionQueue : ActionQueue {
     {
         if (!IsQueueEmpty())
         {
-           // movement.SetTarget(GetNextTarget());
+            movement.SetTarget(GetNextTarget().gameObject);
+            movement.StartMoving();
         }
         else
         {
-            //TODO move this to movement
-            //movement.SetTarget(GameObject.FindGameObjectWithTag("Spawn"));
+            movement.SetTarget(GameObject.FindGameObjectWithTag("Spawn"));
+            movement.StartMoving();
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class Movement : MonoBehaviour
 {
 
     private Vector3 position;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void SetTarget(ServiceStation station) {
+    public void SetTarget(GameObject station) {
         stationPosition = station.transform.position;    
     }
 

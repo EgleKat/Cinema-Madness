@@ -21,25 +21,24 @@ public class StationTrigger : MonoBehaviour {
     /// <summary>
     /// Collide with the player
     /// </summary>
-    /// <param name="collision"></param>
     private void OnTriggerStay2D(Collider2D collision)
     {
         // if the collidee is Player AND if the player is already at the station
         if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
         {
             GetComponent<ServiceStation>().ActivateService();
-            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().StopMoving();
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().StopMoving();
         }
     }
     /// <summary>
-    /// Logic for NPCs colliding with this
+    /// Collide with NPC
     /// </summary>
-    /// <param name="collision"></param>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
             gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<NpcActionQueue>());
+            collision.gameObject.GetComponent<Movement>().StopMoving();
         }
     }
     
