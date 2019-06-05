@@ -1,46 +1,50 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
-public class Movement : MonoBehaviour {
+public class Movement : MonoBehaviour
+{
 
-    Pathfinding.AIDestinationSetter aiDestinationSetter;
-    //Pathfinding.AIPath aiPath;
+    private Vector3 position;
+    //Which direction to move in
 
-	// Use this for initialization
-	void Awake () {
-        aiDestinationSetter = GetComponent<Pathfinding.AIDestinationSetter>();
-    }
+    private Vector3 stationPosition;
+    private bool move;
+    private float speed = 0.05f;
+    private Vector3 velocity;
 
-    /// <summary>
-    /// Set target to object passed in
-    /// </summary>
-    /// <param name="target">Target to travel to</param>
-    public void SetTarget(GameObject target)
+    // Start is called before the first frame update
+    void Start()
     {
-        aiDestinationSetter.target = target.transform;
+        position = gameObject.transform.position;
+        move = false;
+        velocity = new Vector3(0f,0f,0f);
+        
     }
 
-    public void SetTarget(ServiceStation target)
+    // Update is called once per frame
+    void Update()
     {
-        aiDestinationSetter.target = target.gameObject.transform;
+        if(move){
+            position = gameObject.transform.position;
+            //find the direction, where to go and multiply by speed
+            velocity = Vector3.Normalize(stationPosition - position) * speed;
+            //change position based on velocity
+            gameObject.transform.position = position + velocity;
+        }
     }
 
-    ///// <summary>
-    ///// Call this after <see cref="SetPlayerTarget"/> to start player moving to destination
-    ///// </summary>
-    //public void StartMoving()
-    //{
-    //    aiPath.canMove = true;
-    //}
+    public void SetTarget(GameObject station) {
+        stationPosition = station.transform.position;    
+    }
 
-    ///// <summary>
-    ///// Called when touching object to stop player until they have finished interacting with object
-    ///// </summary>
-    //private void StopMoving()
-    //{
-    //    aiPath.canMove = false;
-    //}
+    public void StartMoving() {
+        move = true;
+    }
+
+    public void StopMoving() {
+        move = false;
+    }
+
+
 }

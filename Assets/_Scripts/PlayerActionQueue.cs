@@ -8,18 +8,16 @@ public class PlayerActionQueue : ActionQueue
 
     // Largest size queue can grow to
     public readonly int MAXSIZE = 10;
-    private Movement playerMovement;
-    private Pathfinding.AIPath playerAI;
     private bool firstObjectAdded;
-
+    private Movement playerMovement;
     // Use this for initialization
     void Awake()
     {
         OnAwake();
-        playerAI = GameObject.FindGameObjectWithTag("Player").GetComponent<Pathfinding.AIPath>();
-        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
         firstObjectAdded = false;
+        playerMovement = GetComponent<Movement>();
     }
+
 
     /// <summary>
     /// Adds a new object to the <see cref="targets"/> queue if it is not full
@@ -30,17 +28,20 @@ public class PlayerActionQueue : ActionQueue
     {
         if (actionQueue.Count < MAXSIZE)
         {
-            if (IsQueueEmpty() && (playerAI.reachedEndOfPath || !firstObjectAdded))
+             
+            if (IsQueueEmpty() && (!firstObjectAdded))
             {
                 firstObjectAdded = true;
                 actionQueue.Enqueue(serviceStation);
-
-                playerMovement.SetTarget(GetNextTarget());
+                SetNextTarget();
             }
             else
             {
                 actionQueue.Enqueue(serviceStation);
+                SetNextTarget();
+                playerMovement.StartMoving();
             }
+            
             return true;
         }
         else
@@ -53,16 +54,19 @@ public class PlayerActionQueue : ActionQueue
     {
         if (!IsQueueEmpty())
         {
-            playerMovement.SetTarget(GetNextTarget());
+            playerMovement.SetTarget(GetNextTarget().gameObject);
+            playerMovement.StartMoving();
         }
         else
         {
-            ResetLastTarget();
+            //Do nothing
         }
     }
 
     public void FinishWithServiceStation()
     {
         SetNextTarget();
+        playerMovement.StartMoving();
+
     }
 }
