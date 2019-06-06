@@ -38,14 +38,12 @@ public class Movement : MonoBehaviour
 
     public void StartMoving() {
         move = true;            
- if(gameObject.tag=="NPC")
-        Debug.Log(move);
+
     }
 
     public void StopMoving() {
         move = false;
-         if(gameObject.tag=="NPC")
-        Debug.Log(move);
+
     }
 
 
