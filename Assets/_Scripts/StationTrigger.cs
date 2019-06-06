@@ -21,15 +21,17 @@ public class StationTrigger : MonoBehaviour {
     /// <summary>
     /// Collide with the player
     /// </summary>
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        // if the collidee is Player AND if the player is already at the station
-        if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
-        {
-            GetComponent<ServiceStation>().ActivateService();
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().StopMoving();
-        }
-    }
+    // private void OnTriggerStay2D(Collider2D collision)
+    // {
+    //     // if the collidee is Player AND if the player is already at the station
+    //     if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
+    //     {
+    //         GetComponent<ServiceStation>().ActivateService();
+    //         GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>().StopMoving();
+    //     }
+    // }
+
+    
     /// <summary>
     /// Collide with NPC
     /// </summary>
@@ -39,6 +41,16 @@ public class StationTrigger : MonoBehaviour {
         {
             gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<NpcActionQueue>());
             collision.gameObject.GetComponent<Movement>().StopMoving();
+        }
+
+          // if the collidee is Player AND if the player is already at the station
+        else if (collision.gameObject.CompareTag("Player") && playerQueue.GetLastTarget() == GetComponent<ServiceStation>())
+        {
+            GetComponent<ServiceStation>().ActivateService();
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Movement>().StopMoving();
+            //set the state to be the service station
+            player.GetComponent<PlayerActionQueue>().SetState(gameObject.tag);
         }
     }
     

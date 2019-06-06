@@ -18,8 +18,8 @@ public class NpcActionQueue : ActionQueue {
     // Use this for initialization
     void Start () {
         actionQueue.Enqueue(toilet);
+        //actionQueue.Enqueue(toilet);
         actionQueue.Enqueue(popcorn);
-        actionQueue.Enqueue(toilet);
 
         CheckQueue();
     }

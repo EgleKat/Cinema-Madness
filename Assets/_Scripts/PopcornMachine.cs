@@ -55,6 +55,12 @@ public class PopcornMachine : ServiceStation
         }
 
     }
+
+    public override void AcceptNpc()
+    {
+        //intentionally blank
+    }
+
     /// <summary>
     /// Generate a popcorn sprite in the popcorn machine
     /// </summary>

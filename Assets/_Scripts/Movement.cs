@@ -38,13 +38,10 @@ public class Movement : MonoBehaviour
 
     public void StartMoving() {
         move = true;            
-
     }
 
     public void StopMoving() {
         move = false;
-
     }
-
 
 }
