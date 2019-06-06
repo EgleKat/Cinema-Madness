@@ -9,23 +9,21 @@ public class Movement : MonoBehaviour
     //Which direction to move in
 
     private Vector3 stationPosition;
-    private bool move;
+    private bool move=false;
     private float speed = 0.05f;
-    private Vector3 velocity;
+    private Vector3 velocity = Vector3.zero;
+
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         position = gameObject.transform.position;
-        move = false;
-        velocity = new Vector3(0f,0f,0f);
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(move){
+       if(move){
             position = gameObject.transform.position;
             //find the direction, where to go and multiply by speed
             velocity = Vector3.Normalize(stationPosition - position) * speed;
@@ -39,11 +37,15 @@ public class Movement : MonoBehaviour
     }
 
     public void StartMoving() {
-        move = true;
+        move = true;            
+ if(gameObject.tag=="NPC")
+        Debug.Log(move);
     }
 
     public void StopMoving() {
         move = false;
+         if(gameObject.tag=="NPC")
+        Debug.Log(move);
     }
 
 
