@@ -16,8 +16,10 @@ public class PlayerActionQueue : MonoBehaviour
     PlayerState currentState;
     private ServiceStation nextTarget;
 
+    PlayerActionQueueText playerActionQueueText;
     void Awake()
     {
+        playerActionQueueText = GameObject.FindGameObjectWithTag("PlayerActionQueueText").GetComponent<PlayerActionQueueText>();
         actionQueue = new Queue<ServiceStation>();
         //firstObjectAdded = false;
         playerMovement = GetComponent<Movement>();
@@ -36,7 +38,7 @@ public class PlayerActionQueue : MonoBehaviour
         {
 
             actionQueue.Enqueue(serviceStation);
-
+            playerActionQueueText.SetText(nextTarget, actionQueue);
 
             if (currentState != PlayerState.Moving)
             {
@@ -52,6 +54,8 @@ public class PlayerActionQueue : MonoBehaviour
         if (actionQueue.Count != 0)
         {
             nextTarget = actionQueue.Dequeue();
+            playerActionQueueText.SetText(nextTarget, actionQueue);
+
             String targetTag = nextTarget.gameObject.tag;
             PlayerState targetState = GetNextState(targetTag);
 

@@ -12,6 +12,8 @@ TagManager:
   - PopcornStall
   - Undefined
   - Popcorn
+  - Exit
+  - PlayerActionQueueText
   layers:
   - Default
   - TransparentFX
