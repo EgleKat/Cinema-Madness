@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     //Which direction to move in
 
     private Vector3 stationPosition;
-    private bool move=false;
+    private bool move = false;
     private float speed = 0.05f;
     private Vector3 velocity = Vector3.zero;
 
@@ -32,15 +32,18 @@ public class Movement : MonoBehaviour
         }
     }
 
-    public void SetTarget(GameObject station) {
+    public void SetTarget(GameObject station) 
+    {
         stationPosition = station.transform.position;    
     }
 
-    public void StartMoving() {
-        move = true;            
+    public void StartMoving() 
+    {
+        move = true;  
     }
 
-    public void StopMoving() {
+    public void StopMoving() 
+    {
         move = false;
     }
 

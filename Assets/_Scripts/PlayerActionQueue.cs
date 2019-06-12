@@ -34,9 +34,14 @@ public class PlayerActionQueue : MonoBehaviour
     {
         if (actionQueue.Count < MAXSIZE)
         {
-            actionQueue.Enqueue(serviceStation);
-            SetNextTarget();
 
+            actionQueue.Enqueue(serviceStation);
+
+
+            if (currentState != PlayerState.Moving)
+            {
+                SetNextTarget();
+            }
             return true;
         }
         return false;
@@ -64,7 +69,7 @@ public class PlayerActionQueue : MonoBehaviour
             }
 
         }
-        else 
+        else
         {
             nextTarget = null;
         }

@@ -46,11 +46,12 @@ public class StationTrigger : MonoBehaviour {
           // if the collidee is Player AND if the player is already at the station
         else if (collision.gameObject.CompareTag("Player") && playerQueue.GetNextTarget() == GetComponent<ServiceStation>())
         {
-            GetComponent<ServiceStation>().ActivateService();
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<Movement>().StopMoving();
             //set the state to be the service station
-            player.GetComponent<PlayerActionQueue>().SetState(gameObject.tag);
+            player.GetComponent<PlayerActionQueue>().SetState(gameObject.tag);        
+            GetComponent<ServiceStation>().ActivateService();
+
         }
     }
     
