@@ -437,6 +437,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1934614386}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: -0.000009536743
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.3188231
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: 0.018889695
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.8061807
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.03
@@ -491,44 +519,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 89d65e043eaf6534f9e2bff628ed9aee,
         type: 3}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.000009536743
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.62
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.3188231
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: 0.018889695
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.8061807
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251897049712226, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
-    - {fileID: 114355744548491360, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
 --- !u!4 &309802771 stripped
 Transform:
@@ -1004,6 +995,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1934614386}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Offset.y
+      value: -0.029173136
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.y
+      value: 1.4490967
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Offset.x
+      value: -0.07445136
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 1.1552119
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.01
@@ -1062,44 +1081,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: c681b3c6ea3583a40af34c8de22867da,
         type: 3}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -0.029173136
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 1.4490967
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: -0.07445136
-      objectReference: {fileID: 0}
-    - target: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 1.1552119
-      objectReference: {fileID: 0}
-    - target: {fileID: 114251897049712226, guid: 5d9126ff317a7d545b9f520c1d673676,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
-    - {fileID: 114355744548491360, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
 --- !u!4 &756185745 stripped
 Transform:
@@ -1515,7 +1499,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Empty
 --- !u!222 &1165471061
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1638,7 +1622,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.18522167, y: -1.0754809}
+  m_Offset: {x: 0.18522167, y: -0.55803907}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1649,7 +1633,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3704433, y: 3.1509619}
+  m_Size: {x: 1.3704433, y: 4.1858454}
   m_EdgeRadius: 0
 --- !u!4 &1324322719 stripped
 Transform:
@@ -1819,8 +1803,7 @@ MonoBehaviour:
 --- !u!61 &1529450381
 BoxCollider2D:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 61788381854862552, guid: 5d9126ff317a7d545b9f520c1d673676,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529450379}
@@ -1846,8 +1829,7 @@ BoxCollider2D:
 --- !u!114 &1529450382
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 114251897049712226, guid: 5d9126ff317a7d545b9f520c1d673676,
-    type: 3}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529450379}
@@ -2034,7 +2016,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1934614386}
-  - component: {fileID: 1934614389}
   m_Layer: 0
   m_Name: Bathrooms
   m_TagString: Untagged
@@ -2058,32 +2039,6 @@ Transform:
   m_Father: {fileID: 988441954}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &1934614389
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1934614385}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.18522167, y: -1.0754809}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.3704433, y: 3.1509619}
-  m_EdgeRadius: 0
 --- !u!1001 &1976643235
 PrefabInstance:
   m_ObjectHideFlags: 0

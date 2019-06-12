@@ -56,7 +56,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     public virtual void AcceptNpc()
     {
-        if (!locked && waitingNpcs.Count !=0 )
+        if (!locked && waitingNpcs.Count != 0 )
         {
             LockStation();
             //Pop the NPC off the queue
