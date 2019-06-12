@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcActionQueue :MonoBehaviour {
-   
+public class NpcActionQueue : MonoBehaviour
+{
+
     ServiceStation toilet;
     ServiceStation popcorn;
     Movement movement;
@@ -21,7 +22,8 @@ public class NpcActionQueue :MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         actionQueue.Enqueue(toilet);
         //actionQueue.Enqueue(toilet);
         actionQueue.Enqueue(popcorn);
@@ -29,11 +31,12 @@ public class NpcActionQueue :MonoBehaviour {
         actionQueue.Enqueue(exit);
         SetNextTarget();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public void FinishTask()
     {
@@ -42,7 +45,10 @@ public class NpcActionQueue :MonoBehaviour {
 
     private void SetNextTarget()
     {
-        movement.SetTarget(actionQueue.Dequeue().gameObject);
+        if (actionQueue.Count != 0)
+        {
+            movement.SetTarget(actionQueue.Dequeue().gameObject);
+        }
         movement.StartMoving();
     }
 }

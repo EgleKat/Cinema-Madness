@@ -21,7 +21,6 @@ public class PlayerActionQueue : MonoBehaviour
     {
         playerActionQueueText = GameObject.FindGameObjectWithTag("PlayerActionQueueText").GetComponent<PlayerActionQueueText>();
         actionQueue = new Queue<ServiceStation>();
-        //firstObjectAdded = false;
         playerMovement = GetComponent<Movement>();
         currentState = PlayerState.Idle;
     }
@@ -90,8 +89,8 @@ public class PlayerActionQueue : MonoBehaviour
         {
             case "PopcornMachine":
                 return PlayerState.PopcornMachine;
-            case "Bathrooms":
-                return PlayerState.Bathrooms;
+            case "Bathroom":
+                return PlayerState.Bathroom;
             case "PopcornStall":
                 return PlayerState.PopcornStall;
             default:

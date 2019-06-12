@@ -4,5 +4,5 @@ public enum PlayerState
         Moving,
         PopcornMachine,
         PopcornStall,
-        Bathrooms
+        Bathroom
     };
