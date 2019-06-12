@@ -53,7 +53,6 @@ public class PlayerActionQueue : MonoBehaviour
         if (actionQueue.Count != 0)
         {
             nextTarget = actionQueue.Dequeue();
-            playerActionQueueText.SetText(nextTarget, actionQueue);
 
             String targetTag = nextTarget.gameObject.tag;
             PlayerState targetState = GetNextState(targetTag);
@@ -76,6 +75,8 @@ public class PlayerActionQueue : MonoBehaviour
         {
             nextTarget = null;
         }
+        playerActionQueueText.SetText(nextTarget, actionQueue);
+
     }
 
     public ServiceStation GetNextTarget()
