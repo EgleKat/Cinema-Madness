@@ -33,7 +33,7 @@ public class PopcornMachine : ServiceStation
     {
         if (!filledWithPopcorn && !IsStationLocked())
         {
-            playerActionQueue.FinishWithServiceStation();
+            
             LockStation();
             Invoke("GeneratePopcorn", timeToMakePop);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
@@ -57,6 +57,8 @@ public class PopcornMachine : ServiceStation
             }
 
         }
+
+        playerActionQueue.FinishWithServiceStation();
 
     }
 
