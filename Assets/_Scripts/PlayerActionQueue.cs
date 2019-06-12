@@ -4,20 +4,22 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class PlayerActionQueue : ActionQueue
+public class PlayerActionQueue : MonoBehaviour
 {
 
     // Largest size queue can grow to
-    public readonly int MAXSIZE = 10;
+    public readonly int MAXSIZE = 3;
     private bool firstObjectAdded;
     private Movement playerMovement;
-    // Use this for initialization
+    private Queue<ServiceStation> actionQueue;
 
     PlayerState currentState;
+    private ServiceStation nextTarget;
+
     void Awake()
     {
-        OnAwake();
-        firstObjectAdded = false;
+        actionQueue = new Queue<ServiceStation>();
+        //firstObjectAdded = false;
         playerMovement = GetComponent<Movement>();
         currentState = PlayerState.Idle;
     }
@@ -32,62 +34,50 @@ public class PlayerActionQueue : ActionQueue
     {
         if (actionQueue.Count < MAXSIZE)
         {
-             
-            if (IsQueueEmpty() && (!firstObjectAdded))
-            {
-                firstObjectAdded = true;
-                actionQueue.Enqueue(serviceStation);
-                SetNextTarget();
-            }
-            else
-            {
-                actionQueue.Enqueue(serviceStation);
-                SetNextTarget();
-            }
-            
+            actionQueue.Enqueue(serviceStation);
+            SetNextTarget();
+
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     private void SetNextTarget()
     {
-        if (!IsQueueEmpty())
+        if (actionQueue.Count != 0)
         {
-            GetNextTarget();
-            String targetTag = GetLastTarget().gameObject.tag;
-            Debug.Log("Target tag " + targetTag);
-
+            nextTarget = actionQueue.Dequeue();
+            String targetTag = nextTarget.gameObject.tag;
             PlayerState targetState = GetNextState(targetTag);
-            Debug.Log("Next state will be " + targetState);
 
-            if(targetState != currentState)
+            if (targetState != currentState)
             {
-                playerMovement.SetTarget(GetLastTarget().gameObject);
-                 currentState = PlayerState.Moving;
+                playerMovement.SetTarget(nextTarget.gameObject);
+                currentState = PlayerState.Moving;
                 playerMovement.StartMoving();
-                Debug.Log("Walking");
-
             }
             //it's the same service station where the player is standing
-            else{
+            else
+            {
                 //activate the service without walking
-                GetLastTarget().gameObject.GetComponent<ServiceStation>().ActivateService();
+                nextTarget.gameObject.GetComponent<ServiceStation>().ActivateService();
             }
 
         }
-        else
+        else 
         {
-            //Do nothing
+            nextTarget = null;
         }
+    }
+
+    public ServiceStation GetNextTarget()
+    {
+        return nextTarget;
     }
 
     public PlayerState GetNextState(String targetTag)
     {
-        switch(targetTag)
+        switch (targetTag)
         {
             case "PopcornMachine":
                 return PlayerState.PopcornMachine;
@@ -96,12 +86,13 @@ public class PlayerActionQueue : ActionQueue
             case "PopcornStall":
                 return PlayerState.PopcornStall;
             default:
-                return PlayerState.Idle ;
-        }       
+                return PlayerState.Idle;
+        }
 
     }
 
-    public void SetState(String stateTag) {
+    public void SetState(String stateTag)
+    {
         currentState = GetNextState(stateTag);
     }
 
@@ -110,7 +101,11 @@ public class PlayerActionQueue : ActionQueue
         SetNextTarget();
     }
 
-    public PlayerState GetCurrentState() {
+    public PlayerState GetCurrentState()
+    {
         return currentState;
     }
+
+
+
 }
