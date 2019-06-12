@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NpcActionQueue : ActionQueue {
+public class NpcActionQueue :MonoBehaviour {
    
     ServiceStation toilet;
     ServiceStation popcorn;
     Movement movement;
+    private Queue<ServiceStation> actionQueue;
+    private ServiceStation exit;
+
     private void Awake()
     {
+        //TODO populate from NPCSpawner
         toilet = GameObject.FindGameObjectWithTag("Bathroom").GetComponent<ServiceStation>();
         popcorn = GameObject.FindGameObjectWithTag("PopcornStall").GetComponent<ServiceStation>();
+        exit = GameObject.FindGameObjectWithTag("Exit").GetComponent<ServiceStation>();
         movement = gameObject.GetComponent<Movement>();
-        OnAwake();
+        actionQueue = new Queue<ServiceStation>();
     }
 
     // Use this for initialization
@@ -21,7 +26,8 @@ public class NpcActionQueue : ActionQueue {
         //actionQueue.Enqueue(toilet);
         actionQueue.Enqueue(popcorn);
 
-        CheckQueue();
+        actionQueue.Enqueue(exit);
+        SetNextTarget();
     }
 	
 	// Update is called once per frame
@@ -31,21 +37,12 @@ public class NpcActionQueue : ActionQueue {
 
     public void FinishTask()
     {
-        CheckQueue();
+        SetNextTarget();
     }
 
-    private void CheckQueue()
+    private void SetNextTarget()
     {
-        if (!IsQueueEmpty())
-        {
-            movement.SetTarget(GetNextTarget().gameObject);
-            movement.StartMoving();
-        }
-        else
-        {
-            movement.SetTarget(GameObject.FindGameObjectWithTag("Spawn"));
-            movement.StartMoving();
-        }
-
+        movement.SetTarget(actionQueue.Dequeue().gameObject);
+        movement.StartMoving();
     }
 }
