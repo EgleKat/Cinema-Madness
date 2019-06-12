@@ -9,7 +9,7 @@ public class PopcornStall : ServiceStation {
     {
         base.Awake();
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<InventoryManager>();
-        LockObject();
+        LockStation();
 
     }
     public override void ActivateService()
@@ -17,7 +17,7 @@ public class PopcornStall : ServiceStation {
         //if player has popcorn
         if (playerInventory.HasItemWithTag("Popcorn"))
         {
-            UnlockObject();
+            UnlockStation();
             //call player here
             AcceptNpc();
             //remove item from player
@@ -31,7 +31,7 @@ public class PopcornStall : ServiceStation {
         if(!locked && waitingNpcs.Count != 0)
         {
             //don't let other npcs be accepted until the first one is finished with, make them wait!
-            LockObject();
+            LockStation();
             FinishServingNpc();
         }
     }

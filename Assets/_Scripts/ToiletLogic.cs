@@ -36,7 +36,7 @@ public class ToiletLogic : ServiceStation {
         {
             //clean toilet
             isClean = true;
-            UnlockObject();
+            UnlockStation();
             AcceptNpc();
         }
 

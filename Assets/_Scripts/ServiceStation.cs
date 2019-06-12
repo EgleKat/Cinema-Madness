@@ -21,14 +21,14 @@ public class ServiceStation : MonoBehaviour
         waitingNpcs = new Queue<NpcActionQueue>();
         trigger = GetComponent<StationTrigger>();
 
-        UnlockObject();
+        UnlockStation();
     }
-    protected void UnlockObject()
+    protected void UnlockStation()
     {
         locked = false;
     }
 
-    protected void LockObject()
+    protected void LockStation()
     {
         locked = true;
     }
@@ -38,6 +38,10 @@ public class ServiceStation : MonoBehaviour
         playerActionQueue.AddToQueue(this);
     }
 
+    protected bool IsStationLocked() 
+    {
+        return locked;
+    }
     /// <summary>
     /// Push npc into the queue
     /// </summary>
@@ -54,7 +58,7 @@ public class ServiceStation : MonoBehaviour
     {
         if (!locked && waitingNpcs.Count !=0 )
         {
-            LockObject();
+            LockStation();
             //Pop the NPC off the queue
             Invoke("FinishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
@@ -68,7 +72,7 @@ public class ServiceStation : MonoBehaviour
     /// </summary>
     protected virtual void FinishServingNpc()
     {
-        UnlockObject();
+        UnlockStation();
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
         Destroy(timer);

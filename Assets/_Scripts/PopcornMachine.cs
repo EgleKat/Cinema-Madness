@@ -31,21 +31,25 @@ public class PopcornMachine : ServiceStation
 
     public override void ActivateService()
     {
-        if (!filledWithPopcorn)
+        if (!filledWithPopcorn && !IsStationLocked())
         {
             playerActionQueue.FinishWithServiceStation();
+            LockStation();
             Invoke("GeneratePopcorn", timeToMakePop);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToMakePop;
+
+
         }
         //give user the popcorn
-        else
+        else if(filledWithPopcorn)
         {
             if (playerInventory.HasSpace())
             {
                 playerInventory.AddItemToInventory(Resources.Load("Prefabs/Popcorn") as GameObject);
                 spriteRenderer.sprite = popcornMachineSprite;
                 filledWithPopcorn = false;
+                UnlockStation();
             }
             else
             {
