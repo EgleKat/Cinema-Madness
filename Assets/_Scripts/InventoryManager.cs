@@ -3,21 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour {
+public class InventoryManager : MonoBehaviour
+{
 
-    public int inventorySpace = 1;
+    private int inventorySpace = 2;
     //TODO change GameObject to Item
     private GameObject[] inventory;
+    private InventoryText inventoryText;
 
-	// Use this for initialization
-	void Awake() {
+    // Use this for initialization
+    void Awake()
+    {
         inventory = new GameObject[inventorySpace];
+        inventoryText = GameObject.FindGameObjectWithTag("InventoryText").GetComponent<InventoryText>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     public bool HasItemWithTag(string tag)
     {
@@ -40,12 +45,13 @@ public class InventoryManager : MonoBehaviour {
     /// <param name="item"></param>
     public void AddItemToInventory(GameObject item)
     {
-        for(int i=0; i<inventory.Length; i++)
+        for (int i = 0; i < inventory.Length; i++)
         {
-            if(inventory[i]==null)
+            if (inventory[i] == null)
             {
                 Debug.Log("Adding item to inventory");
                 inventory[i] = item;
+                inventoryText.SetText(inventory);
                 return;
             }
         }
@@ -54,14 +60,15 @@ public class InventoryManager : MonoBehaviour {
     /// <summary>
     /// Remove a specific item from the inventory
     /// </summary>
-    /// <param name="itemToRemove"></param>
     public void RemoveItem(string tag)
     {
-        for(int i=0; i<inventory.Length; i++)
+        for (int i = 0; i < inventory.Length; i++)
         {
-            if(inventory[i].tag==tag)
+            if (inventory[i] != null && inventory[i].tag == tag)
             {
                 inventory[i] = null;
+                inventoryText.SetText(inventory);
+
                 return;
             }
         }
@@ -72,7 +79,7 @@ public class InventoryManager : MonoBehaviour {
     {
         for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i]== null)
+            if (inventory[i] == null)
             {
                 return true;
             }

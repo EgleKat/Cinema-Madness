@@ -11,7 +11,7 @@ public class PlayerActionQueueText : MonoBehaviour
     {
         text = GetComponent<Text>();
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
