@@ -15,6 +15,7 @@ TagManager:
   - Exit
   - PlayerActionQueueText
   - InventoryText
+  - ScoreText
   layers:
   - Default
   - TransparentFX
