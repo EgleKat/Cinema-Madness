@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 /// <summary>
 /// Superclass for objects which NPCs can use. It has general queue and lockdown methods
@@ -80,14 +81,21 @@ public class ServiceStation : MonoBehaviour
     /// <summary>
     /// Called after the timer runs out
     /// </summary>
-    protected async virtual void FinishServingNpc()
+    protected virtual void FinishServingNpc()
     {
         UnlockStation();
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
         Destroy(timer);
-        foreach (NpcActionQueue waitingNpc in waitingNpcs)
+        MoveQueueUp();
+    }
+
+    protected async void MoveQueueUp()
+    {
+        for (int i=0; i<waitingNpcs.Count; i++)
         {
+            var waitingNpc = waitingNpcs.ElementAtOrDefault(i);
+            if (waitingNpc == null) { continue; }
             Movement nextNpcMovement = waitingNpc.GetComponent<Movement>();
             if (!nextNpcMovement.isAtFrontOfQueue)
             {
@@ -95,7 +103,6 @@ public class ServiceStation : MonoBehaviour
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
-
     }
 
     /// <summary>
