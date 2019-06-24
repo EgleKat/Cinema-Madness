@@ -8,41 +8,58 @@ public class Movement : MonoBehaviour
     private Vector3 position;
     //Which direction to move in
 
-    private Vector3 stationPosition;
+    private Vector2 stationPosition;
     private bool move = false;
     private float speed = 0.05f;
-    private Vector3 velocity = Vector3.zero;
+    private Vector2 velocity = Vector2.zero;
+    private SpriteRenderer spriteRenderer;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         position = gameObject.transform.position;
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(move){
+        if (move)
+        {
             position = gameObject.transform.position;
+            Vector2 vector2Position = (Vector2)position;
             //find the direction, where to go and multiply by speed
-            velocity = Vector3.Normalize(stationPosition - position) * speed;
+            velocity = (stationPosition - vector2Position).normalized * speed;
+
+            Vector3 newVector3Position = vector2Position + velocity;
+            newVector3Position.z = position.z;
             //change position based on velocity
-            gameObject.transform.position = position + velocity;
+            gameObject.transform.position = newVector3Position;
+            
+
+            if (velocity.x > 0)
+            {
+                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            }
+            else
+            {
+                transform.localScale = new Vector3(-0.5f,0.5f,0.5f);
+            }
         }
     }
 
-    public void SetTarget(GameObject station) 
+    public void SetTarget(GameObject station)
     {
-        stationPosition = station.transform.position;    
+        stationPosition = station.transform.position;
     }
 
-    public void StartMoving() 
+    public void StartMoving()
     {
-        move = true;  
+        move = true;
     }
 
-    public void StopMoving() 
+    public void StopMoving()
     {
         move = false;
     }

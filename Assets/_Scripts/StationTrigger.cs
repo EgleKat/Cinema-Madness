@@ -49,7 +49,7 @@ public class StationTrigger : MonoBehaviour {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             player.GetComponent<Movement>().StopMoving();
             //set the state to be the service station
-            player.GetComponent<PlayerActionQueue>().SetState(gameObject.tag);        
+            player.GetComponent<PlayerActionQueue>().SetStateWithString(gameObject.tag);        
             GetComponent<ServiceStation>().ActivateService();
 
         }

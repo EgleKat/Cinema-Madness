@@ -14,6 +14,7 @@ public class PlayerActionQueue : MonoBehaviour
     private Queue<ServiceStation> actionQueue;
 
     PlayerState currentState;
+    Animator playerAnimator;
     private ServiceStation nextTarget;
 
     PlayerActionQueueText playerActionQueueText;
@@ -23,6 +24,7 @@ public class PlayerActionQueue : MonoBehaviour
         actionQueue = new Queue<ServiceStation>();
         playerMovement = GetComponent<Movement>();
         currentState = PlayerState.Idle;
+        playerAnimator = gameObject.GetComponent<Animator>();
     }
 
 
@@ -60,7 +62,7 @@ public class PlayerActionQueue : MonoBehaviour
             if (targetState != currentState)
             {
                 playerMovement.SetTarget(nextTarget.gameObject);
-                currentState = PlayerState.Moving;
+                SetState(PlayerState.Moving);
                 playerMovement.StartMoving();
             }
             //it's the same service station where the player is standing
@@ -100,9 +102,22 @@ public class PlayerActionQueue : MonoBehaviour
 
     }
 
-    public void SetState(String stateTag)
+    public void SetStateWithString(String stateTag)
     {
-        currentState = GetNextState(stateTag);
+        SetState(GetNextState(stateTag));
+    }
+    public void SetState(PlayerState state)
+    {
+        currentState = state;
+        if (currentState == PlayerState.Moving)
+        {
+            playerAnimator.SetBool("isMoving", true);
+            
+        }
+        else
+        {
+            playerAnimator.SetBool("isMoving", false);
+        }
     }
 
     public void FinishWithServiceStation()
@@ -114,6 +129,7 @@ public class PlayerActionQueue : MonoBehaviour
     {
         return currentState;
     }
+    
 
 
 
