@@ -6,6 +6,8 @@ public class Movement : MonoBehaviour
 {
 
     private Vector3 position;
+    public bool isAtFrontOfQueue;
+
     //Which direction to move in
 
     private Vector3 stationPosition;
@@ -34,7 +36,8 @@ public class Movement : MonoBehaviour
 
     public void SetTarget(GameObject station) 
     {
-        stationPosition = station.transform.position;    
+        isAtFrontOfQueue = false;
+        stationPosition = station.transform.position;
     }
 
     public void StartMoving() 

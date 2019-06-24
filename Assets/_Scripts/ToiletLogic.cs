@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ToiletLogic : ServiceStation {
@@ -18,12 +20,21 @@ public class ToiletLogic : ServiceStation {
     /// <summary>
     /// Called after the timer runs out
     /// </summary>
-    protected override void FinishServingNpc()
+    protected async override void FinishServingNpc()
     {
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
         Destroy(timer);
         isClean = false;
+        foreach (NpcActionQueue waitingNpc in waitingNpcs)
+        {
+            Movement nextNpcMovement = waitingNpc.GetComponent<Movement>();
+            if (!nextNpcMovement.isAtFrontOfQueue)
+            {
+                nextNpcMovement.StartMoving();
+                await Task.Delay(TimeSpan.FromSeconds(0.1));
+            }
+        }
 
     }
     /// <summary>

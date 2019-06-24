@@ -39,8 +39,11 @@ public class StationTrigger : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("NPC"))
         {
-            gameObject.GetComponent<ServiceStation>().EnterQueue(collision.gameObject.GetComponent<NpcActionQueue>());
-            collision.gameObject.GetComponent<Movement>().StopMoving();
+            var npcActionQueue = collision.gameObject.GetComponent<NpcActionQueue>();
+            var npcMovement = collision.gameObject.GetComponent<Movement>();
+            gameObject.GetComponent<ServiceStation>().EnterQueue(npcActionQueue);
+            npcMovement.StopMoving();
+            npcMovement.isAtFrontOfQueue = true;
         }
 
           // if the collidee is Player AND if the player is already at the station

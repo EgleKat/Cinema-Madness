@@ -62,7 +62,7 @@ public class PopcornMachine : ServiceStation
 
     }
 
-    public override void AcceptNpc()
+    public override void AcceptNpcExtras()
     {
         //intentionally blank
     }

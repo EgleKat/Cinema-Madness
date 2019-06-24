@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 /// <summary>
 /// Superclass for objects which NPCs can use. It has general queue and lockdown methods
@@ -38,7 +39,7 @@ public class ServiceStation : MonoBehaviour
         playerActionQueue.AddToQueue(this);
     }
 
-    protected bool IsStationLocked() 
+    protected bool IsStationLocked()
     {
         return locked;
     }
@@ -46,36 +47,54 @@ public class ServiceStation : MonoBehaviour
     /// Push npc into the queue
     /// </summary>
     /// <param name="npcActionQueue"></param>
-    public virtual void EnterQueue(NpcActionQueue npcActionQueue)
+    public void EnterQueue(NpcActionQueue npcActionQueue)
     {
-        waitingNpcs.Enqueue(npcActionQueue);
-        AcceptNpc();
+        if (!waitingNpcs.Contains(npcActionQueue))
+        {
+            waitingNpcs.Enqueue(npcActionQueue);
+            AcceptNpc();
+        }
     }
+
+    public void AcceptNpc()
+    {
+        AcceptNpcExtras();
+    }
+
     /// <summary>
     /// Let npc use the queue if the service isn't locked
     /// </summary>
-    public virtual void AcceptNpc()
+    public virtual void AcceptNpcExtras()
     {
-        if (!locked && waitingNpcs.Count != 0 )
+        if (!locked && waitingNpcs.Count != 0)
         {
             LockStation();
             //Pop the NPC off the queue
             Invoke("FinishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
-            
+
         }
     }
 
     /// <summary>
     /// Called after the timer runs out
     /// </summary>
-    protected virtual void FinishServingNpc()
+    protected async virtual void FinishServingNpc()
     {
         UnlockStation();
         waitingNpcs.Dequeue().FinishTask();
         //remove timer
         Destroy(timer);
+        foreach (NpcActionQueue waitingNpc in waitingNpcs)
+        {
+            Movement nextNpcMovement = waitingNpc.GetComponent<Movement>();
+            if (!nextNpcMovement.isAtFrontOfQueue)
+            {
+                nextNpcMovement.StartMoving();
+                await Task.Delay(TimeSpan.FromSeconds(1));
+            }
+        }
 
     }
 
