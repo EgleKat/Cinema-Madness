@@ -32,3 +32,13 @@ Update Mode: updateDependencies
 The following packages were updated:
   com.unity.ide.rider from version 1.0.4 to 1.0.8
   com.unity.ide.vscode from version 1.0.4 to 1.0.7
+
+=== Mon Jun 24 17:35:54 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.ide.visualstudio from version 1.0.10 to 1.0.11
+The following packages were removed:
+  com.unity.package-manager-ui@2.2.0
