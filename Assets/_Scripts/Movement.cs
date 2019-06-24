@@ -38,13 +38,14 @@ public class Movement : MonoBehaviour
             gameObject.transform.position = newVector3Position;
             
 
+            
             if (velocity.x > 0)
             {
-                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
             else
             {
-                transform.localScale = new Vector3(-0.5f,0.5f,0.5f);
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             }
         }
     }
