@@ -9,6 +9,8 @@ public class NpcActionQueue : MonoBehaviour
     ServiceStation popcorn;
     Movement movement;
     private Queue<ServiceStation> actionQueue;
+    
+    public ServiceStation nextTarget;
     private ServiceStation exit;
 
     private void Awake()
@@ -47,8 +49,24 @@ public class NpcActionQueue : MonoBehaviour
     {
         if (actionQueue.Count != 0)
         {
-            movement.SetTarget(actionQueue.Dequeue().gameObject);
+            nextTarget = actionQueue.Dequeue();
+            movement.SetTarget(nextTarget.gameObject);
         }
         movement.StartMoving();
+    }
+
+
+    //so that NPCs queue behind each other
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("NPC"))
+        {
+            if (nextTarget.waitingNpcs.Contains(collision.gameObject.GetComponent<NpcActionQueue>())) {
+                // if NPC we collided with is already waiting at the service station we want to go to
+                nextTarget.EnterQueue(this);
+                movement.StopMoving();
+            }
+            
+        }
     }
 }

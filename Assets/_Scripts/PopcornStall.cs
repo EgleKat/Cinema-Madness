@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class PopcornStall : ServiceStation {
@@ -28,7 +30,7 @@ public class PopcornStall : ServiceStation {
         playerActionQueue.FinishWithServiceStation();
     }
 
-    public override void AcceptNpc()
+    public override void AcceptNpcExtras()
     {
         if(!locked)
         {
@@ -38,11 +40,20 @@ public class PopcornStall : ServiceStation {
         }
     }
 
-    protected override void FinishServingNpc()
+    protected async override void FinishServingNpc()
     {
         waitingNpcs.Dequeue().FinishTask();
         scoreManager.addScoreByObject(PaidItem.Popcorn);
 
+        foreach (NpcActionQueue waitingNpc in waitingNpcs)
+        {
+            Movement nextNpcMovement = waitingNpc.GetComponent<Movement>();
+            if (!nextNpcMovement.isAtFrontOfQueue)
+            {
+                nextNpcMovement.StartMoving();
+                await Task.Delay(TimeSpan.FromSeconds(0.1));
+            }
+        }
     }
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class test_red_dot : MonoBehaviour {
-    Camera camera;
+    new Camera camera;
     // Use this for initialization
     void Start () {
         camera = Camera.main;
