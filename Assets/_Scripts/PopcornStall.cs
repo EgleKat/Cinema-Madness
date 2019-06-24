@@ -40,20 +40,12 @@ public class PopcornStall : ServiceStation {
         }
     }
 
-    protected async override void FinishServingNpc()
+    protected override void FinishServingNpc()
     {
         waitingNpcs.Dequeue().FinishTask();
         scoreManager.addScoreByObject(PaidItem.Popcorn);
 
-        foreach (NpcActionQueue waitingNpc in waitingNpcs)
-        {
-            Movement nextNpcMovement = waitingNpc.GetComponent<Movement>();
-            if (!nextNpcMovement.isAtFrontOfQueue)
-            {
-                nextNpcMovement.StartMoving();
-                await Task.Delay(TimeSpan.FromSeconds(0.1));
-            }
-        }
+        MoveQueueUp();
     }
 
 }
