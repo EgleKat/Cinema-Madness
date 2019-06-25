@@ -14,7 +14,6 @@ public class PlayerActionQueue : MonoBehaviour
     private Queue<ServiceStation> actionQueue;
 
     PlayerState currentState;
-    Animator playerAnimator;
     private ServiceStation nextTarget;
 
     PlayerActionQueueText playerActionQueueText;
@@ -24,7 +23,6 @@ public class PlayerActionQueue : MonoBehaviour
         actionQueue = new Queue<ServiceStation>();
         playerMovement = GetComponent<Movement>();
         currentState = PlayerState.Idle;
-        playerAnimator = gameObject.GetComponent<Animator>();
     }
 
 
@@ -109,15 +107,6 @@ public class PlayerActionQueue : MonoBehaviour
     public void SetState(PlayerState state)
     {
         currentState = state;
-        if (currentState == PlayerState.Moving)
-        {
-            playerAnimator.SetBool("isMoving", true);
-            
-        }
-        else
-        {
-            playerAnimator.SetBool("isMoving", false);
-        }
     }
 
     public void FinishWithServiceStation()

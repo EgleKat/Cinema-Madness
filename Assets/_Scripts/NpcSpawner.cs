@@ -39,7 +39,7 @@ public class NpcSpawner : MonoBehaviour
         {
             GameObject NPC = Instantiate(Resources.Load("Prefabs/NPC") as GameObject, gameObject.transform);
             //make the npc a random color
-            NPC.GetComponent<SpriteRenderer>().color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            //NPC.GetComponent<SpriteRenderer>().color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             npcsToSpawn--;
             StartCoroutine(SpawnNPC(npcsToSpawn, delayTime));
         }

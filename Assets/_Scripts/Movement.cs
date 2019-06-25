@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     public bool isAtFrontOfQueue;
 
     //Which direction to move in
+    private Animator animator;
 
     private Vector2 stationPosition;
     private bool move = false;
@@ -22,6 +23,8 @@ public class Movement : MonoBehaviour
     {
         position = gameObject.transform.position;
         spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        animator = gameObject.GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -38,9 +41,9 @@ public class Movement : MonoBehaviour
             newVector3Position.z = position.z;
             //change position based on velocity
             gameObject.transform.position = newVector3Position;
-            
 
-            
+
+
             if (velocity.x > 0)
             {
                 transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
@@ -61,11 +64,14 @@ public class Movement : MonoBehaviour
     public void StartMoving()
     {
         move = true;
+        animator.SetBool("isMoving", true);
     }
 
     public void StopMoving()
     {
         move = false;
+        animator.SetBool("isMoving", false);
+
     }
 
 }
