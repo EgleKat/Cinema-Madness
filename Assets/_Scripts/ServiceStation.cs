@@ -74,6 +74,8 @@ public class ServiceStation : MonoBehaviour
             Invoke("FinishServingNpc", timeToServeNpc);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToServeNpc;
+            timer.transform.localScale = new Vector3(0.5f, 0.5f, timer.transform.localScale.z);
+
 
         }
     }
@@ -92,7 +94,7 @@ public class ServiceStation : MonoBehaviour
 
     protected async void MoveQueueUp()
     {
-        for (int i=0; i<waitingNpcs.Count; i++)
+        for (int i = 0; i < waitingNpcs.Count; i++)
         {
             var waitingNpc = waitingNpcs.ElementAtOrDefault(i);
             if (waitingNpc == null) { continue; }

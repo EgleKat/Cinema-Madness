@@ -38,6 +38,8 @@ public class PopcornMachine : ServiceStation
             Invoke("GeneratePopcorn", timeToMakePop);
             timer = Instantiate(Resources.Load("Prefabs/TimerCircle") as GameObject, gameObject.transform);
             timer.GetComponent<Animator>().speed = 1 / timeToMakePop;
+            
+            timer.transform.localScale = new Vector3(2f,2f, timer.transform.localScale.z);
 
 
         }

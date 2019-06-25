@@ -53,3 +53,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Timers
+    uniqueID: 2261810639
+    locked: 0
