@@ -1,12 +1,14 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
 
     private NpcSpawner spawner;
-    private int currentWave = 1;
+    private int currentWave = 0;
     private Dictionary<int, Wave> allwaves = new Dictionary<int, Wave>
     {
         {0, new Wave(4,10)},//default wave
@@ -14,17 +16,25 @@ public class WaveManager : MonoBehaviour
         {2, new Wave(3, 10)}
     };
 
+    private uint numNpcsWhoHaveExited = 0;
+
 
     private void Awake()
     {
         spawner = GameObject.FindGameObjectWithTag("Spawn").GetComponent<NpcSpawner>();
+    }
+
+    private void Start()
+    {
         StartNextWave();
     }
 
     private void StartNextWave()
     {
-        Debug.Log("Next Wave " + currentWave);
-                Debug.Log(allwaves.ContainsKey(currentWave));
+        currentWave++;
+        numNpcsWhoHaveExited = 0;
+
+        Debug.Log("Starting Wave " + currentWave);
 
         if (allwaves.ContainsKey(currentWave))
         {
@@ -32,16 +42,19 @@ public class WaveManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("This level does not exist");
             spawner.SpawnNPCs(allwaves[0].npcNo, allwaves[0].time);
         }
     }
 
-    public void WaveFinished()
+    public async void NpcExited()
     {
-        currentWave++;
-        StartNextWave();
+        numNpcsWhoHaveExited++;
+        if (numNpcsWhoHaveExited >= allwaves[currentWave].npcNo) {
+            await Task.Delay(TimeSpan.FromSeconds(5));
+            StartNextWave();
+        }
     }
+
     private class Wave
     {
         public int npcNo;
