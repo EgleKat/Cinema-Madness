@@ -57,7 +57,7 @@ public class ServiceStation : MonoBehaviour
         }
     }
 
-    public void AcceptNpc()
+    public virtual void AcceptNpc()
     {
         AcceptNpcExtras();
     }

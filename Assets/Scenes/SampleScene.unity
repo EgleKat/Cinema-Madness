@@ -474,7 +474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.54
+      value: -0.31
       objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalPosition.z
@@ -514,25 +514,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4663244931782268, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 212148478881833152, guid: 5d9126ff317a7d545b9f520c1d673676,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 89d65e043eaf6534f9e2bff628ed9aee,
+      objectReference: {fileID: 2202052502791470606, guid: 17a8ac66c40d88e4f9560030c072a917,
         type: 3}
     - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.38
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.62
+      value: 87
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+      propertyPath: m_Offset.y
+      value: -12.533991
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+      propertyPath: m_Size.y
+      value: 52.04891
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.82491684
+      objectReference: {fileID: 0}
+    - target: {fileID: 1306627404, guid: 5d9126ff317a7d545b9f520c1d673676, type: 3}
+      propertyPath: m_Size.x
+      value: 21.979412
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -1624,6 +1640,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b901b08bac362499d0ebc09e92d701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closedToiletSprite: {fileID: 2554841806318704301, guid: 17a8ac66c40d88e4f9560030c072a917,
+    type: 3}
+  openToiletSprite: {fileID: 2202052502791470606, guid: 17a8ac66c40d88e4f9560030c072a917,
+    type: 3}
+  dirtyToiletSprite: {fileID: 21300000, guid: 31533f2c3ee60bb4fac31e6fd94224a7, type: 3}
 --- !u!4 &1324322719 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4364353986830636, guid: ed732fd0c005b42499f78ac18eac6b61,
