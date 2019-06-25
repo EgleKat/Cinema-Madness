@@ -13,7 +13,7 @@ public class Movement : MonoBehaviour
 
     private Vector2 stationPosition;
     private bool move = false;
-    private float speed = 0.05f;
+    private float speed = 10f;
     private Vector2 velocity = Vector2.zero;
     private SpriteRenderer spriteRenderer;
 
@@ -35,7 +35,7 @@ public class Movement : MonoBehaviour
             position = gameObject.transform.position;
             Vector2 vector2Position = (Vector2)position;
             //find the direction, where to go and multiply by speed
-            velocity = (stationPosition - vector2Position).normalized * speed;
+            velocity = (stationPosition - vector2Position).normalized * speed * Time.deltaTime;
 
             Vector3 newVector3Position = vector2Position + velocity;
             newVector3Position.z = position.z;
