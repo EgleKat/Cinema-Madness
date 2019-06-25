@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 
 public class WaveManager : MonoBehaviour
@@ -18,10 +19,13 @@ public class WaveManager : MonoBehaviour
 
     private uint numNpcsWhoHaveExited = 0;
 
+    private GameObject canvas;
+
 
     private void Awake()
     {
         spawner = GameObject.FindGameObjectWithTag("Spawn").GetComponent<NpcSpawner>();
+        canvas = GameObject.Find("Canvas");
     }
 
     private void Start()
@@ -44,6 +48,16 @@ public class WaveManager : MonoBehaviour
         {
             spawner.SpawnNPCs(allwaves[0].npcNo, allwaves[0].time);
         }
+
+        ShowWaveText();
+    }
+
+    private async void ShowWaveText()
+    {
+        GameObject waveText = Instantiate(Resources.Load("Prefabs/Wave") as GameObject, canvas.transform);
+        waveText.GetComponent<TextMeshProUGUI>().text = "Wave " + currentWave.ToString();
+        await Task.Delay(10000);
+        Destroy(waveText);
     }
 
     public async void NpcExited()

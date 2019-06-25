@@ -16,6 +16,7 @@ TagManager:
   - PlayerActionQueueText
   - InventoryText
   - ScoreText
+  - WaveText
   layers:
   - Default
   - TransparentFX
