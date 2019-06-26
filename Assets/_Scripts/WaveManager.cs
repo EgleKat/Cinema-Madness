@@ -38,16 +38,9 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         numNpcsWhoHaveExited = 0;
 
-        Debug.Log("Starting Wave " + currentWave);
+        Wave currentWaveData = GetWaveDataOrDefault(currentWave);
+        spawner.SpawnNPCs(currentWaveData.npcNo, currentWaveData.time);
 
-        if (allwaves.ContainsKey(currentWave))
-        {
-            spawner.SpawnNPCs(allwaves[currentWave].npcNo, allwaves[0].time);
-        }
-        else
-        {
-            spawner.SpawnNPCs(allwaves[0].npcNo, allwaves[0].time);
-        }
 
         ShowWaveText();
     }
@@ -63,9 +56,22 @@ public class WaveManager : MonoBehaviour
     public async void NpcExited()
     {
         numNpcsWhoHaveExited++;
-        if (numNpcsWhoHaveExited >= allwaves[currentWave].npcNo) {
+        if (numNpcsWhoHaveExited >= GetWaveDataOrDefault(currentWave).npcNo)
+        {
             await Task.Delay(TimeSpan.FromSeconds(5));
             StartNextWave();
+        }
+    }
+
+    private Wave GetWaveDataOrDefault(int waveNumber)
+    {
+        if (allwaves.ContainsKey(waveNumber))
+        {
+            return allwaves[waveNumber];
+        }
+        else
+        {
+            return allwaves[0];
         }
     }
 
