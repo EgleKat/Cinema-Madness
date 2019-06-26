@@ -57,3 +57,9 @@ TagManager:
   - name: Timers
     uniqueID: 2261810639
     locked: 0
+  - name: NPCs
+    uniqueID: 2715540673
+    locked: 0
+  - name: Player
+    uniqueID: 38654149
+    locked: 0
